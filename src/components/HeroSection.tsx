@@ -41,7 +41,7 @@ const HeroSection = () => {
               href="#contact"
               className="gold-gradient inline-flex items-center justify-center gap-2 px-7 py-3 font-display text-sm font-semibold transition-opacity hover:opacity-80"
             >
-              Request a Briefing
+              Book a Discovery Call
               <ArrowRight size={16} />
             </a>
             <a
