@@ -1,3 +1,5 @@
+const CALENDLY_URL = "https://calendly.com/eshani-aixatech/30min";
+
 const Footer = () => {
   return (
     <footer className="border-t border-border bg-background px-6 py-12 lg:px-8">
@@ -12,8 +14,6 @@ const Footer = () => {
         </div>
 
         <div className="flex gap-8">
-          {/* If you don't have dedicated pages yet, use anchors.
-              IMPORTANT: you must have elements with these ids on the page for scrolling to work. */}
           <a
             href="#privacy"
             className="font-mono text-[11px] text-muted-foreground hover:text-foreground"
@@ -26,11 +26,15 @@ const Footer = () => {
           >
             Terms
           </a>
+
+          {/* Updated: Calendly */}
           <a
-            href="mailto:contact@aixatech.com"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-mono text-[11px] text-muted-foreground hover:text-foreground"
           >
-            Contact
+            Book a Discovery Call
           </a>
         </div>
 
@@ -44,5 +48,3 @@ const Footer = () => {
 
 export default Footer;
 
-
-export default Footer;
