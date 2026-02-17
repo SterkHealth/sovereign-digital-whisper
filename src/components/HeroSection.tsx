@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 
 const CALENDLY_URL = "https://calendly.com/eshani-aixatech/30min";
+const APPROACH_URL = "/solutions"; // <-- takes user to the Solutions page
 
 export default function HeroSection() {
   return (
     <section className="relative bg-black text-white">
       <div className="container mx-auto px-6 py-28">
-
         {/* Label */}
         <div className="mb-6">
           <span className="border border-white/20 px-4 py-2 text-xs tracking-widest uppercase text-white/70">
@@ -14,8 +14,11 @@ export default function HeroSection() {
           </span>
         </div>
 
-        {/* Headline (ALL WHITE — NO GRADIENT, NO OPACITY) */}
-        <h1 className="max-w-4xl text-5xl md:text-6xl font-semibold leading-tight text-white">
+        {/* Headline (FORCED ALL WHITE) */}
+        <h1
+          className="max-w-4xl text-5xl md:text-6xl font-semibold leading-tight"
+          style={{ color: "#fff" }} // hard-force white so nothing overrides it
+        >
           Build digital public infrastructure your nation owns and controls.
         </h1>
 
@@ -28,41 +31,28 @@ export default function HeroSection() {
 
         {/* Buttons */}
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
-
           {/* Primary — WHITE */}
-          <Button
-            asChild
-            size="lg"
-            className="bg-white text-black hover:bg-white/90"
-          >
-            <a
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+          <Button asChild size="lg" className="bg-white text-black hover:bg-white/90">
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
               Book a Discovery Call →
             </a>
           </Button>
 
-          {/* Secondary — GREY */}
+          {/* Secondary — GREY + goes to Solutions page */}
           <Button
             asChild
             size="lg"
             variant="outline"
             className="bg-white/10 text-white/70 border-white/20 hover:bg-white/15 hover:text-white"
           >
-            <a href="#approach">
-              See Our Approach
-            </a>
+            <a href={APPROACH_URL}>See Our Approach</a>
           </Button>
-
         </div>
 
         {/* Trust Line */}
         <div className="mt-16 text-xs tracking-wide text-white/40 uppercase">
           Trusted by government agencies across Africa, the Middle East, and Southeast Asia.
         </div>
-
       </div>
     </section>
   );
