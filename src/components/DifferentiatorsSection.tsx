@@ -32,7 +32,7 @@ const DifferentiatorsSection = () => {
     <section id="differentiators" className="section-padding bg-background">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <p className="font-display text-sm font-semibold uppercase tracking-widest text-gold">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
             Why Aixa Tech
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
@@ -44,7 +44,7 @@ const DifferentiatorsSection = () => {
           {differentiators.map((d) => (
             <div
               key={d.title}
-              className="rounded-xl border border-border bg-card p-8"
+              className="border border-border bg-card p-8"
             >
               <h3 className="font-display text-xl font-bold text-card-foreground">
                 {d.title}
@@ -52,8 +52,8 @@ const DifferentiatorsSection = () => {
               <ul className="mt-5 space-y-3">
                 {d.points.map((point) => (
                   <li key={point} className="flex items-start gap-3">
-                    <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-gold/10">
-                      <Check size={12} className="text-gold" />
+                    <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center bg-foreground/10">
+                      <Check size={12} className="text-foreground" />
                     </div>
                     <span className="font-body text-sm text-muted-foreground">
                       {point}

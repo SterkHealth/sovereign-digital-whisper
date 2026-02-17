@@ -34,7 +34,7 @@ const DeliverySection = () => {
     <section id="delivery" className="section-padding bg-section-alt">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <p className="font-display text-sm font-semibold uppercase tracking-widest text-gold">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
             How We Deliver
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
@@ -45,17 +45,15 @@ const DeliverySection = () => {
         <div className="mt-14 grid gap-0 md:grid-cols-4">
           {steps.map((step, i) => (
             <div key={step.phase} className="relative pb-10 md:pb-0">
-              {/* Connector line */}
               {i < steps.length - 1 && (
                 <div className="absolute left-6 top-12 hidden h-px w-full bg-border md:block" />
               )}
 
               <div className="relative">
-                {/* Phase number */}
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary font-display text-sm font-bold text-primary-foreground">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center bg-primary font-mono text-sm font-bold text-primary-foreground">
                   {step.phase}
                 </div>
-                <p className="mb-1 font-body text-xs font-medium uppercase tracking-wider text-gold">
+                <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
                   {step.duration}
                 </p>
                 <h3 className="font-display text-lg font-bold text-foreground">

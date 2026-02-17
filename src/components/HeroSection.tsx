@@ -1,36 +1,35 @@
-import { ArrowRight, Shield } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
   return (
     <section className="hero-gradient relative flex min-h-screen items-center overflow-hidden pt-20">
       {/* Subtle grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            "linear-gradient(hsl(220 15% 60%) 1px, transparent 1px), linear-gradient(90deg, hsl(220 15% 60%) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+            "linear-gradient(hsl(0 0% 50%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 50%) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
         }}
       />
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8">
         <div className="max-w-3xl">
           {/* Badge */}
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-hero-foreground/10 bg-hero-foreground/5 px-4 py-1.5">
-            <Shield size={14} className="text-gold" />
-            <span className="font-body text-xs tracking-wide text-hero-muted">
+          <div className="mb-8 inline-flex items-center gap-2 border border-hero-foreground/20 px-4 py-1.5">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-hero-muted">
               Sovereign Digital Infrastructure
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-balance font-display text-4xl font-800 leading-[1.1] tracking-tight text-hero-foreground md:text-5xl lg:text-6xl">
+          <h1 className="text-balance font-display text-4xl font-700 leading-[1.05] tracking-tight text-hero-foreground md:text-6xl lg:text-7xl">
             Build digital public infrastructure your nation{" "}
-            <span className="text-gold">owns and controls.</span>
+            <span className="text-hero-muted">owns and controls.</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="mt-6 max-w-xl font-body text-lg leading-relaxed text-hero-muted md:text-xl">
+          <p className="mt-6 max-w-xl font-body text-base leading-relaxed text-hero-muted md:text-lg">
             Aixa Tech delivers modular, privacy-by-design platforms for
             identity, payments, and data exchange — deployed on your
             terms, with full knowledge transfer.
@@ -40,21 +39,21 @@ const HeroSection = () => {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <a
               href="#contact"
-              className="gold-gradient inline-flex items-center justify-center gap-2 rounded-md px-7 py-3 font-display text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+              className="gold-gradient inline-flex items-center justify-center gap-2 px-7 py-3 font-display text-sm font-semibold transition-opacity hover:opacity-80"
             >
               Request a Briefing
               <ArrowRight size={16} />
             </a>
             <a
               href="#solutions"
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-hero-foreground/15 px-7 py-3 font-display text-sm font-semibold text-hero-foreground transition-colors hover:bg-hero-foreground/5"
+              className="inline-flex items-center justify-center gap-2 border border-hero-foreground/20 px-7 py-3 font-display text-sm font-semibold text-hero-foreground transition-colors hover:bg-hero-foreground/5"
             >
               See Our Approach
             </a>
           </div>
 
           {/* Trust line */}
-          <p className="mt-12 font-body text-xs tracking-wide text-hero-muted/60">
+          <p className="mt-16 font-mono text-[10px] uppercase tracking-[0.15em] text-hero-muted/40">
             Trusted by government agencies across Africa, the Middle East, and Southeast Asia.
           </p>
         </div>

@@ -32,7 +32,7 @@ const ProblemSection = () => {
     <section id="problem" className="section-padding bg-background">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <p className="font-display text-sm font-semibold uppercase tracking-widest text-gold">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
             The Challenge
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
@@ -44,8 +44,8 @@ const ProblemSection = () => {
         <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {problems.map((p) => (
             <div key={p.title} className="group">
-              <div className="mb-4 inline-flex rounded-lg border border-border bg-secondary p-3">
-                <p.icon size={20} className="text-gold" />
+              <div className="mb-4 inline-flex border border-border bg-secondary p-3">
+                <p.icon size={20} className="text-foreground" />
               </div>
               <h3 className="font-display text-lg font-semibold text-foreground">
                 {p.title}
