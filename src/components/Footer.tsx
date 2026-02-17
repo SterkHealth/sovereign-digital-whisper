@@ -4,27 +4,27 @@ const Footer = () => {
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
         <div>
           <span className="font-display text-lg font-bold text-foreground">
-            Aixa<span className="text-gold">Tech</span>
+            AIXA<span className="text-muted-foreground">TECH</span>
           </span>
-          <p className="mt-1 font-body text-xs text-muted-foreground">
+          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
             AI-Native Sovereign Digital Public Infrastructure
           </p>
         </div>
 
         <div className="flex gap-8">
-          <a href="#" className="font-body text-sm text-muted-foreground hover:text-foreground">
-            Privacy Policy
+          <a href="#" className="font-mono text-[11px] text-muted-foreground hover:text-foreground">
+            Privacy
           </a>
-          <a href="#" className="font-body text-sm text-muted-foreground hover:text-foreground">
+          <a href="#" className="font-mono text-[11px] text-muted-foreground hover:text-foreground">
             Terms
           </a>
-          <a href="mailto:contact@aixatech.com" className="font-body text-sm text-muted-foreground hover:text-foreground">
+          <a href="mailto:contact@aixatech.com" className="font-mono text-[11px] text-muted-foreground hover:text-foreground">
             Contact
           </a>
         </div>
 
-        <p className="font-body text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Aixa Tech. All rights reserved.
+        <p className="font-mono text-[10px] text-muted-foreground">
+          © {new Date().getFullYear()} Aixa Tech
         </p>
       </div>
     </footer>

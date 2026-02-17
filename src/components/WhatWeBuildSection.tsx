@@ -38,13 +38,13 @@ const WhatWeBuildSection = () => {
     <section id="what-we-build" className="section-padding bg-background">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <p className="font-display text-sm font-semibold uppercase tracking-widest text-gold">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
             What We Build
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             Modular DPI components, ready to deploy.
           </h2>
-          <p className="mt-4 font-body text-lg text-muted-foreground">
+          <p className="mt-4 font-body text-base text-muted-foreground">
             Each module is independently deployable, auditable, and extensible by your teams.
           </p>
         </div>
@@ -53,10 +53,10 @@ const WhatWeBuildSection = () => {
           {products.map((p) => (
             <div
               key={p.title}
-              className="card-hover rounded-xl border border-border bg-card p-7"
+              className="card-hover border border-border bg-card p-7"
             >
-              <div className="mb-4 inline-flex rounded-md border border-border bg-secondary p-2.5">
-                <p.icon size={18} className="text-gold" />
+              <div className="mb-4 inline-flex border border-border bg-secondary p-2.5">
+                <p.icon size={18} className="text-foreground" />
               </div>
               <h3 className="font-display text-base font-bold text-card-foreground">
                 {p.title}

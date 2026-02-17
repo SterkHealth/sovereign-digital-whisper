@@ -16,8 +16,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-hero-foreground/10 bg-hero/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <a href="#" className="font-display text-xl font-bold tracking-tight text-hero-foreground">
-          Aixa<span className="text-gold">Tech</span>
+        <a href="#" className="font-display text-lg font-bold tracking-tight text-hero-foreground">
+          AIXA<span className="text-hero-muted">TECH</span>
         </a>
 
         {/* Desktop */}
@@ -26,14 +26,14 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className="font-body text-sm text-hero-muted transition-colors hover:text-hero-foreground"
+              className="font-mono text-[11px] uppercase tracking-[0.1em] text-hero-muted transition-colors hover:text-hero-foreground"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="gold-gradient rounded-md px-5 py-2 font-display text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+            className="gold-gradient px-5 py-2 font-display text-sm font-semibold transition-opacity hover:opacity-80"
           >
             Get in Touch
           </a>
@@ -58,7 +58,7 @@ const Navbar = () => {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="font-body text-sm text-hero-muted transition-colors hover:text-hero-foreground"
+                className="font-mono text-[11px] uppercase tracking-[0.1em] text-hero-muted transition-colors hover:text-hero-foreground"
               >
                 {link.label}
               </a>
@@ -66,7 +66,7 @@ const Navbar = () => {
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="gold-gradient mt-2 rounded-md px-5 py-2 text-center font-display text-sm font-semibold text-accent-foreground"
+              className="gold-gradient mt-2 px-5 py-2 text-center font-display text-sm font-semibold"
             >
               Get in Touch
             </a>

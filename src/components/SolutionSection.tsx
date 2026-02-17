@@ -32,13 +32,13 @@ const SolutionSection = () => {
     <section id="solutions" className="section-padding bg-section-alt">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <p className="font-display text-sm font-semibold uppercase tracking-widest text-gold">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
             Our Approach
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             Infrastructure that stays when we leave.
           </h2>
-          <p className="mt-4 font-body text-lg text-muted-foreground">
+          <p className="mt-4 font-body text-base text-muted-foreground">
             Aixa Tech builds sovereign digital public infrastructure that governments
             own, operate, and evolve — independently.
           </p>
@@ -48,9 +48,9 @@ const SolutionSection = () => {
           {pillars.map((p) => (
             <div
               key={p.title}
-              className="card-hover rounded-xl border border-border bg-card p-8"
+              className="card-hover border border-border bg-card p-8"
             >
-              <div className="mb-5 inline-flex rounded-lg bg-primary p-3">
+              <div className="mb-5 inline-flex bg-primary p-3">
                 <p.icon size={20} className="text-primary-foreground" />
               </div>
               <h3 className="font-display text-xl font-bold text-card-foreground">
