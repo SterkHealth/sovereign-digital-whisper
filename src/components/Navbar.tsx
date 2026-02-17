@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Problem", href: "#problem" },
   { label: "Solutions", href: "#solutions" },
   { label: "What We Build", href: "#what-we-build" },
   { label: "Delivery", href: "#delivery" },
   { label: "Why Aixa", href: "#differentiators" },
-  { label: "Team", href: "#team" },
 ];
 
 const Navbar = () => {
