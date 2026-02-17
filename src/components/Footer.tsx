@@ -12,13 +12,24 @@ const Footer = () => {
         </div>
 
         <div className="flex gap-8">
-          <a href="#" className="font-mono text-[11px] text-muted-foreground hover:text-foreground">
+          {/* If you don't have dedicated pages yet, use anchors.
+              IMPORTANT: you must have elements with these ids on the page for scrolling to work. */}
+          <a
+            href="#privacy"
+            className="font-mono text-[11px] text-muted-foreground hover:text-foreground"
+          >
             Privacy
           </a>
-          <a href="#" className="font-mono text-[11px] text-muted-foreground hover:text-foreground">
+          <a
+            href="#terms"
+            className="font-mono text-[11px] text-muted-foreground hover:text-foreground"
+          >
             Terms
           </a>
-          <a href="mailto:contact@aixatech.com" className="font-mono text-[11px] text-muted-foreground hover:text-foreground">
+          <a
+            href="mailto:contact@aixatech.com"
+            className="font-mono text-[11px] text-muted-foreground hover:text-foreground"
+          >
             Contact
           </a>
         </div>
@@ -30,5 +41,8 @@ const Footer = () => {
     </footer>
   );
 };
+
+export default Footer;
+
 
 export default Footer;
