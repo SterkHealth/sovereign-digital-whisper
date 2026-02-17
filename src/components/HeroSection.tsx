@@ -28,14 +28,14 @@ export default function HeroSection() {
        <div className="mt-10 flex flex-col sm:flex-row gap-4">
   {/* Primary: Calendly */}
   <Button asChild size="lg" className="bg-white text-black hover:bg-white/90">
-    <a
-      href="https://calendly.com/eshani-aixatech/30min"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Book a Discovery Call →
-    </a>
-  </Button>
+  <a
+    href="https://calendly.com/eshani-aixatech/30min"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Book a Discovery Call →
+  </a>
+</Button>
 
   {/* Secondary: scroll to Approach section */}
   <Button
