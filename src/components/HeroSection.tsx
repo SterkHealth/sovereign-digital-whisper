@@ -39,7 +39,7 @@ const HeroSection = () => {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <a
               href="#contact"
-              className="gold-gradient inline-flex items-center justify-center gap-2 px-7 py-3 font-display text-sm font-semibold transition-opacity hover:opacity-80"
+              className="bg-black text-white inline-flex items-center justify-center gap-2 px-7 py-3 font-display text-sm font-semibold transition-opacity hover:opacity-80"
             >
               Book a Discovery Call
               <ArrowRight size={16} />
