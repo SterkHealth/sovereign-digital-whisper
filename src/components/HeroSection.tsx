@@ -25,33 +25,29 @@ export default function HeroSection() {
         </p>
 
         {/* Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row gap-4">
+       <div className="mt-10 flex flex-col sm:flex-row gap-4">
+  {/* Primary: Calendly */}
+  <Button asChild size="lg" className="bg-white text-black hover:bg-white/90">
+    <a
+      href="https://calendly.com/eshani-aixatech/30min"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Book a Discovery Call →
+    </a>
+  </Button>
 
-          {/* White Primary Button */}
-          <Button
-            size="lg"
-            className="bg-white text-black hover:bg-white/90"
-            asChild
-          >
-            <a
-              href="https://calendly.com/eshani-aixatech/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Book a Discovery Call →
-            </a>
-          </Button>
+  {/* Secondary: scroll to Approach section */}
+  <Button
+    asChild
+    size="lg"
+    variant="outline"
+    className="bg-transparent text-white/70 border-white/20 hover:text-white hover:border-white/40 hover:bg-white/5"
+  >
+    <a href="#approach">See Our Approach</a>
+  </Button>
+</div>
 
-          {/* Grey Secondary Button */}
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-white/30 text-white hover:bg-white/10"
-          >
-            See Our Approach
-          </Button>
-
-        </div>
 
         {/* Trust Line */}
         <div className="mt-16 text-xs tracking-wide text-white/40 uppercase">
