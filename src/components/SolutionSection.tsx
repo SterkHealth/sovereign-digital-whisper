@@ -111,7 +111,7 @@ const SolutionSection = () => {
             Platform
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            The sovereign platform for digital government.
+            The sovereign platform for a government that runs at software speed
           </h2>
           <p className="mt-4 font-body text-base text-muted-foreground">
             Aixa Tech delivers modular digital public infrastructure—deployed on your terms—so governments can
