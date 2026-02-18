@@ -16,7 +16,7 @@ import {
 const pillars = [
   {
     icon: Server,
-    title: "Core modules (deploy what you need)",
+    title: "Core Infratructure Layers",
     description:
       "Identity, wallet, payments, registries, and data exchange ship as independent modules. Start small and expand without replatforming.",
   },
