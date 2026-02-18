@@ -33,7 +33,7 @@ const SolutionSection = () => {
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-            Our Approach
+           Platform
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             Infrastructure that stays when we leave.
