@@ -50,7 +50,7 @@ export default function HeroSection() {
           {/* Primary — WHITE */}
           <Button asChild size="lg" className="bg-white text-black hover:bg-white/90">
             <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-              Book a Discovery Call →
+              Start a Sovereign Pilot →
             </a>
           </Button>
 
