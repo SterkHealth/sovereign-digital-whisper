@@ -41,8 +41,8 @@ export default function HeroSection() {
 
         {/* Subtext */}
         <p className="mt-6 max-w-2xl text-lg text-white/70">
-          We build sovereign digital backbones that power identity, payments, registries, 
-          and public services — built to be owned, operated, and evolved by the state.
+          We build the core operating layer for identity, payments, registries, and public services
+          designed for full state ownership and AI-driven automation.
         </p>
 
         {/* Buttons */}
