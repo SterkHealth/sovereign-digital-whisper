@@ -35,15 +35,14 @@ export default function HeroSection() {
 
         {/* Headline — WHITE + GREY SPLIT */}
         <h1 className="max-w-4xl text-5xl md:text-6xl font-semibold leading-tight">
-          Build digital public infrastructure your nation{" "}
-          <span className="text-white/60">owns and controls.</span>
+          The AI-native operating system{" "}
+          <span className="text-white/60">for modern governments</span>
         </h1>
 
         {/* Subtext */}
         <p className="mt-6 max-w-2xl text-lg text-white/70">
-          Aixa Tech delivers modular, privacy-by-design platforms for identity,
-          payments, and secure data exchange — deployed on your terms, with full
-          knowledge transfer.
+          We build sovereign digital backbones that power identity, payments, registries, 
+          and public services — built to be owned, operated, and evolved by the state.
         </p>
 
         {/* Buttons */}
