@@ -24,8 +24,8 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative bg-black text-white">
-      <div className="container mx-auto px-6 py-28">
+<section className="relative bg-black text-white min-h-screen flex items-center">
+<div className="container mx-auto px-6 py-24">
         {/* Label */}
         <div className="mb-6">
           <span className="border border-white/20 px-4 py-2 text-xs tracking-widest uppercase text-white/70">
