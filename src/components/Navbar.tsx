@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Solutions", href: "#solutions" },
-  { label: "What We Build", href: "#what-we-build" },
+  { label: "Platform", href: "#solutions" },
+  { label: "Architecture", href: "#what-we-build" },
   { label: "Delivery", href: "#delivery" },
   { label: "Why Aixa", href: "#differentiators" },
 ];
