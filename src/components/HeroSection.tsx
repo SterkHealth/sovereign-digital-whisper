@@ -61,7 +61,7 @@ export default function HeroSection() {
             className="bg-white/10 text-white/70 border border-white/20 hover:bg-white/15 hover:text-white"
           >
             <a href="#solutions" onClick={goToSolutions}>
-              See Our Approach
+              Our Platform
             </a>
           </Button>
         </div>
