@@ -212,6 +212,7 @@ function SovereignDiagram() {
 
 const products = [
   {
+    id: "paas",
     number: "01",
     tag: "Platform as a Service",
     audience: "For insurers, reinsurers, DFIs, agri-lenders",
@@ -230,6 +231,7 @@ const products = [
     flip: false,
   },
   {
+    id: "daas",
     number: "02",
     tag: "Data as a Service",
     audience: "For reinsurers, DFIs, governments, researchers",
@@ -248,6 +250,7 @@ const products = [
     flip: true,
   },
   {
+    id: "sovereign",
     number: "03",
     tag: "Sovereign AI",
     audience:
@@ -304,7 +307,7 @@ export default function ProductsPage() {
       {/* ── Products ──────────────────────────────────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
         {products.map((p, idx) => (
-          <div key={p.number}>
+          <div key={p.number} id={p.id}>
             <div
               className={`grid items-start gap-12 py-20 lg:grid-cols-2 ${
                 p.flip ? "lg:[&>*:first-child]:order-2" : ""
