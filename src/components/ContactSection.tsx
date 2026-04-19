@@ -31,10 +31,10 @@ const ContactSection = () => {
           </a>
 
           <a
-            href="mailto:eshani@aixatech.co"
+            href="#solutions"
             className="inline-flex items-center gap-2 border border-hero-foreground/20 px-8 py-3.5 font-display text-sm font-semibold text-hero-foreground transition-colors hover:bg-hero-foreground/5"
           >
-            eshani@aixatech.co
+            Our Platform
           </a>
         </div>
 
