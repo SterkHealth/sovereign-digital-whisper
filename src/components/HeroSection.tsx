@@ -17,7 +17,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative bg-black text-white min-h-screen flex items-center">
+    <section className="relative text-white min-h-screen flex items-center" style={{ background: "radial-gradient(ellipse at 25% 60%, #0d2010 0%, #051008 40%, #000000 75%)" }}>
       <div className="container mx-auto px-6 py-24">
         {/* Label */}
         <div className="mb-6">
@@ -70,7 +70,7 @@ export default function HeroSection() {
 
         {/* Trust Line */}
         <div className="mt-16 text-xs tracking-wide text-white/40 uppercase">
-          Deployed with the African Development Bank, Aon, and governments across East and Southern Africa.
+          Built for governments, insurers, and development institutions across the Global South.
         </div>
       </div>
     </section>
