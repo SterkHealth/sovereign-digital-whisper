@@ -32,38 +32,38 @@ function arcPoints(
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
-const ORIGINS: { ll: [number, number]; label: string }[] = [
-  { ll: [-1.29,  36.82], label: "Kenya"         },
-  { ll: [ 6.37,  -2.38], label: "Ghana"         },
-  { ll: [-26.2,  28.04], label: "South Africa"  },
-  { ll: [ 9.14,  40.49], label: "Ethiopia"      },
-  { ll: [14.47, -14.45], label: "Senegal"       },
-  { ll: [ 0.34,  32.58], label: "Uganda"        },
-  { ll: [-3.38,  29.36], label: "Burundi"       },
-  { ll: [12.36,  -1.53], label: "Burkina Faso"  },
+// dx/dy: pixel offset from the dot centre
+// align / base: canvas textAlign / textBaseline
+type LabelPos = { dx: number; dy: number; align: CanvasTextAlign; base: CanvasTextBaseline };
+
+const ORIGINS: { ll: [number, number]; label: string; lp: LabelPos }[] = [
+  { ll: [-1.29,  36.82], label: "Kenya",        lp: { dx:  10, dy:   0, align: "left",   base: "middle" } },
+  { ll: [ 6.37,  -2.38], label: "Ghana",        lp: { dx: -10, dy:   0, align: "right",  base: "middle" } },
+  { ll: [-26.2,  28.04], label: "South Africa", lp: { dx:  10, dy:   0, align: "left",   base: "middle" } },
+  { ll: [ 9.14,  40.49], label: "Ethiopia",     lp: { dx:  10, dy:   0, align: "left",   base: "middle" } },
+  { ll: [14.47, -14.45], label: "Senegal",      lp: { dx: -10, dy:   0, align: "right",  base: "middle" } },
+  { ll: [ 0.34,  32.58], label: "Uganda",       lp: { dx:   0, dy: -13, align: "center", base: "bottom" } },
+  { ll: [-3.38,  29.36], label: "Burundi",      lp: { dx: -10, dy:  12, align: "right",  base: "top"    } },
+  { ll: [12.36,  -1.53], label: "Burkina Faso", lp: { dx:   0, dy: -13, align: "center", base: "bottom" } },
 ];
 
-const DESTINATIONS: { ll: [number, number]; label: string }[] = [
-  { ll: [51.5,   -0.12], label: "London"   },
-  { ll: [48.85,   2.35], label: "Paris"    },
-  { ll: [40.71, -74.01], label: "New York" },
-  { ll: [52.52,  13.4 ], label: "Berlin"   },
-  { ll: [45.42, -75.69], label: "Ottawa"   },
+const DESTINATIONS: { ll: [number, number]; label: string; lp: LabelPos }[] = [
+  { ll: [51.5,   -0.12], label: "London",   lp: { dx: -10, dy:   0, align: "right",  base: "middle" } },
+  { ll: [48.85,   2.35], label: "Paris",    lp: { dx:  10, dy:  10, align: "left",   base: "top"    } },
+  { ll: [40.71, -74.01], label: "New York", lp: { dx: -10, dy:   0, align: "right",  base: "middle" } },
+  { ll: [52.52,  13.4 ], label: "Berlin",   lp: { dx:  10, dy:   0, align: "left",   base: "middle" } },
+  { ll: [45.42, -75.69], label: "Ottawa",   lp: { dx: -10, dy: -12, align: "right",  base: "bottom" } },
 ];
 
-// Additional country labels shown on the globe surface
+// Faint country names — only African ones (northern country names clash with destination labels)
 const COUNTRY_LABELS: { ll: [number, number]; label: string }[] = [
-  { ll: [ 9.0,   8.0], label: "Nigeria"     },
-  { ll: [-6.4,  34.9], label: "Tanzania"    },
-  { ll: [-4.0,  21.8], label: "DR Congo"    },
-  { ll: [15.0,  30.0], label: "Sudan"       },
-  { ll: [-18.7, 35.5], label: "Mozambique"  },
-  { ll: [-11.2, 17.9], label: "Angola"      },
-  { ll: [12.4,   2.3], label: "Niger"       },
-  { ll: [54.0,  -2.0], label: "UK"          },
-  { ll: [46.2,   2.2], label: "France"      },
-  { ll: [37.1, -95.7], label: "USA"         },
-  { ll: [51.2,  10.5], label: "Germany"     },
+  { ll: [ 9.0,   8.0], label: "Nigeria"    },
+  { ll: [-6.4,  34.9], label: "Tanzania"   },
+  { ll: [-4.0,  21.8], label: "DR Congo"   },
+  { ll: [15.0,  30.0], label: "Sudan"      },
+  { ll: [-18.7, 35.5], label: "Mozambique" },
+  { ll: [-11.2, 17.9], label: "Angola"     },
+  { ll: [12.4,   2.3], label: "Niger"      },
 ];
 
 const ARCS = ORIGINS.map((o, i) => ({
@@ -211,35 +211,32 @@ export default function GlobeSection() {
       });
 
       // ── Origin dots + labels ─────────────────────────────────────
-      ORIGINS.forEach(({ ll, label }) => {
+      ORIGINS.forEach(({ ll, label, lp }) => {
         const p = project(ll[0], ll[1], vcLat, vcLon, R, cx, cy);
         if (!p.visible) return;
 
         const pulse = 0.5 + 0.5 * Math.sin(ts * 0.0025 + ll[0]);
 
-        // Pulse ring
         ctx!.beginPath();
         ctx!.arc(p.x, p.y, 4 + pulse * 5, 0, Math.PI * 2);
         ctx!.strokeStyle = `rgba(74,222,128,${0.35 * pulse})`;
         ctx!.lineWidth   = 1;
         ctx!.stroke();
 
-        // Core dot
         ctx!.beginPath();
         ctx!.arc(p.x, p.y, 3.5, 0, Math.PI * 2);
         ctx!.fillStyle = "#4ade80";
         ctx!.fill();
 
-        // Label
         ctx!.font         = `600 11px 'Space Grotesk', sans-serif`;
         ctx!.fillStyle    = "rgba(74,222,128,0.9)";
-        ctx!.textAlign    = "left";
-        ctx!.textBaseline = "middle";
-        ctx!.fillText(label, p.x + 8, p.y);
+        ctx!.textAlign    = lp.align;
+        ctx!.textBaseline = lp.base;
+        ctx!.fillText(label, p.x + lp.dx, p.y + lp.dy);
       });
 
       // ── Destination dots + labels ────────────────────────────────
-      DESTINATIONS.forEach(({ ll, label }) => {
+      DESTINATIONS.forEach(({ ll, label, lp }) => {
         const p = project(ll[0], ll[1], vcLat, vcLon, R, cx, cy);
         if (!p.visible) return;
 
@@ -249,10 +246,10 @@ export default function GlobeSection() {
         ctx!.fill();
 
         ctx!.font         = `500 10px 'Space Grotesk', sans-serif`;
-        ctx!.fillStyle    = "rgba(210,130,48,0.8)";
-        ctx!.textAlign    = "left";
-        ctx!.textBaseline = "middle";
-        ctx!.fillText(label, p.x + 7, p.y);
+        ctx!.fillStyle    = "rgba(210,130,48,0.85)";
+        ctx!.textAlign    = lp.align;
+        ctx!.textBaseline = lp.base;
+        ctx!.fillText(label, p.x + lp.dx, p.y + lp.dy);
       });
 
       // ── Globe rim ────────────────────────────────────────────────
