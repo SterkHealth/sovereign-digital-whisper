@@ -1,31 +1,24 @@
-const steps = [
+const streams = [
   {
-    phase: "01",
-    title: "Assess & Align",
-    duration: "Weeks 1–4",
+    code: "PaaS",
+    title: "Platform-as-a-Service",
     description:
-      "Joint assessment of institutional readiness, existing infrastructure, regulatory requirements, and priority use cases.",
+      "Annual licences ($20k–$150k) to enterprise, SMEs, governments, and development organisations for access to the full platform or individual modules.",
+    badge: "Recurring · High Margin",
   },
   {
-    phase: "02",
-    title: "Architect & Configure",
-    duration: "Weeks 5–12",
+    code: "DaaS",
+    title: "Data-as-a-Service",
     description:
-      "Co-design system architecture with your technical team. Select modules, define data flows, and configure for local regulatory compliance.",
+      "Metered API access for developers, insurers, agri-lenders, and climate analysts needing real-time indices, risk scores, and farmer datasets.",
+    badge: "Usage-Based · Scalable",
   },
   {
-    phase: "03",
-    title: "Build & Test",
-    duration: "Weeks 13–24",
+    code: "SD",
+    title: "Sovereign Deployments",
     description:
-      "Deploy in a sovereign cloud or on-premise environment. Rigorous security testing, load testing, and pilot rollout with real users.",
-  },
-  {
-    phase: "04",
-    title: "Train & Transfer",
-    duration: "Weeks 25–32",
-    description:
-      "Structured knowledge transfer to local engineering teams. Complete documentation, runbooks, and ongoing support SLAs.",
+      "Turnkey sovereign data stack deployments for national governments, including setup, localisation, and ongoing support contracts.",
+    badge: "Project-Based · Strategic",
   },
 ];
 
@@ -35,36 +28,46 @@ const DeliverySection = () => {
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-            How We Deliver
+            Business Model
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            From assessment to handover in under 8 months.
+            Built for recurring, sovereign-scale revenue.
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-0 md:grid-cols-4">
-          {steps.map((step, i) => (
-            <div key={step.phase} className="relative pb-10 md:pb-0">
-              {i < steps.length - 1 && (
-                <div className="absolute left-6 top-12 hidden h-px w-full bg-border md:block" />
-              )}
-
-              <div className="relative">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center bg-primary font-mono text-sm font-bold text-primary-foreground">
-                  {step.phase}
-                </div>
-                <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-                  {step.duration}
-                </p>
-                <h3 className="font-display text-lg font-bold text-foreground">
-                  {step.title}
-                </h3>
-                <p className="mt-2 max-w-xs font-body text-sm leading-relaxed text-muted-foreground">
-                  {step.description}
-                </p>
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          {streams.map((s) => (
+            <div key={s.title} className="card-hover border border-border bg-card p-8">
+              <div
+                className="mb-5 flex h-12 w-12 items-center justify-center font-mono text-sm font-bold text-white"
+                style={{ background: "hsl(33,65%,50%)" }}
+              >
+                {s.code}
               </div>
+              <h3 className="font-display text-xl font-bold text-card-foreground">{s.title}</h3>
+              <p className="mt-3 font-body text-sm leading-relaxed text-muted-foreground">
+                {s.description}
+              </p>
+              <p
+                className="mt-5 font-mono text-[10px] uppercase tracking-[0.15em]"
+                style={{ color: "hsl(33,65%,50%)" }}
+              >
+                {s.badge}
+              </p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 border border-border bg-card p-8">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            Near-term target
+          </p>
+          <p className="mt-3 font-display text-xl font-bold text-foreground">
+            4 paid pilots at an average $150K, converting to annual licences within 12 months.
+          </p>
+          <p className="mt-2 font-body text-sm text-muted-foreground">
+            This positions us to raise $3–5M and expand to five target markets within 18 months.
+          </p>
         </div>
       </div>
     </section>

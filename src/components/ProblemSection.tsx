@@ -1,29 +1,23 @@
-import { AlertTriangle, Lock, Clock, DollarSign } from "lucide-react";
+import { CloudLightning, Database, Globe } from "lucide-react";
 
 const problems = [
   {
-    icon: Lock,
-    title: "Vendor lock-in",
+    icon: CloudLightning,
+    title: "Climate Shocks",
     description:
-      "Most governments depend on foreign-owned platforms for critical services. When contracts end or geopolitics shift, access disappears.",
+      "Sub-Saharan Africa loses up to 15% of GDP to climate-related disasters yearly. Yet fewer than 20% of smallholder farmers have access to actionable early warning data.",
   },
   {
-    icon: AlertTriangle,
-    title: "Citizen data at risk",
+    icon: Database,
+    title: "Data Gaps",
     description:
-      "Personal data flows through systems your teams cannot audit. Privacy regulations exist, but the infrastructure to enforce them does not.",
+      "Enterprises, governments, and insurers rely on outdated, foreign-hosted datasets. Real-time agri and climate data is locked behind expensive proprietary systems built for developed markets.",
   },
   {
-    icon: Clock,
-    title: "Years-long deployments",
+    icon: Globe,
+    title: "Data Sovereignty",
     description:
-      "Traditional system integrators deliver on multi-year timelines. By the time infrastructure arrives, the need has already evolved.",
-  },
-  {
-    icon: DollarSign,
-    title: "No lasting capacity",
-    description:
-      "Consultants leave. Code sits unmaintained. The knowledge to operate and extend sovereign systems never transfers to local teams.",
+      "Critical national agricultural data flows to servers outside Africa. Nations cannot govern, monetize, or act on their own resources — undermining food security planning.",
   },
 ];
 
@@ -33,28 +27,32 @@ const ProblemSection = () => {
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-            The Challenge
+            The Problem
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            Digital sovereignty is not optional.{" "}
-            <span className="text-muted-foreground">It&apos;s overdue.</span>
+            $90B lost.{" "}
+            <span className="text-muted-foreground">The data to fix it barely exists.</span>
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-8 sm:grid-cols-3">
           {problems.map((p) => (
             <div key={p.title} className="group">
               <div className="mb-4 inline-flex border border-border bg-secondary p-3">
                 <p.icon size={20} className="text-foreground" />
               </div>
-              <h3 className="font-display text-lg font-semibold text-foreground">
-                {p.title}
-              </h3>
+              <h3 className="font-display text-lg font-semibold text-foreground">{p.title}</h3>
               <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">
                 {p.description}
               </p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 border-l-2 border-[hsl(33,65%,50%)] pl-5">
+          <p className="font-body text-base text-foreground">
+            Aixatech builds the intelligence infrastructure that changes that.
+          </p>
         </div>
       </div>
     </section>

@@ -11,17 +11,15 @@ const ContactSection = () => {
         </p>
 
         <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-hero-foreground md:text-4xl">
-          Ready to build infrastructure your nation controls?
+          Ready to build the infrastructure your nation controls?
         </h2>
 
         <p className="mt-4 font-body text-base text-hero-muted">
-          Schedule a confidential discovery call with our team. We&apos;ll assess your
-          current landscape and outline a practical path forward.
+          Schedule a confidential discovery call with our team. We'll assess your current landscape
+          and outline a practical path to climate intelligence and agri data infrastructure.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          
-          {/* PRIMARY CTA — FIXED */}
           <a
             href={CALENDLY_URL}
             target="_blank"
@@ -32,14 +30,12 @@ const ContactSection = () => {
             <ArrowRight size={16} />
           </a>
 
-          {/* SECONDARY CTA (leave as-is or wire to PDF later) */}
           <a
-            href="/capability-deck.pdf"
+            href="mailto:eshani@aixatech.co"
             className="inline-flex items-center gap-2 border border-hero-foreground/20 px-8 py-3.5 font-display text-sm font-semibold text-hero-foreground transition-colors hover:bg-hero-foreground/5"
           >
-            Download Capability Deck
+            eshani@aixatech.co
           </a>
-
         </div>
 
         <p className="mt-8 font-mono text-[10px] tracking-[0.1em] text-hero-muted/40">
@@ -51,4 +47,3 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
-

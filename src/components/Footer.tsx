@@ -9,32 +9,21 @@ const Footer = () => {
             AIXA<span className="text-muted-foreground">TECH</span>
           </span>
           <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
-            AI-Native Sovereign Digital Public Infrastructure
+            Agri Data · Climate Risk Intelligence · Sovereign AI
           </p>
         </div>
 
         <div className="flex gap-8">
-          <a
-            href="#privacy"
-            className="font-mono text-[11px] text-muted-foreground hover:text-foreground"
-          >
-            Privacy
+          <a href="mailto:eshani@aixatech.co" className="font-mono text-[11px] text-muted-foreground hover:text-foreground">
+            eshani@aixatech.co
           </a>
-          <a
-            href="#terms"
-            className="font-mono text-[11px] text-muted-foreground hover:text-foreground"
-          >
-            Terms
-          </a>
-
-          {/* Updated: Calendly */}
           <a
             href={CALENDLY_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-[11px] text-muted-foreground hover:text-foreground"
           >
-            Book a Discovery Call
+            Book a Call
           </a>
         </div>
 
@@ -47,4 +36,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

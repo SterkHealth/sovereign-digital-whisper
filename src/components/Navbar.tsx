@@ -3,9 +3,9 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Platform", href: "#solutions" },
-  { label: "Architecture", href: "#what-we-build" },
-  { label: "Delivery", href: "#delivery" },
-  { label: "Why Aixa", href: "#differentiators" },
+  { label: "How It Works", href: "#what-we-build" },
+  { label: "Proof Points", href: "#differentiators" },
+  { label: "Team", href: "#team" },
 ];
 
 const Navbar = () => {

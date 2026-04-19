@@ -1,23 +1,31 @@
 const team = [
   {
-    name: "Dr. Amara Osei",
-    role: "Chief Executive Officer",
-    bio: "Former Director of Digital Transformation at the African Development Bank. 18 years in public sector technology strategy.",
+    name: "Eshani Kaushal",
+    role: "Founder & CEO",
+    background: "Legal, Government Relations, Emerging Markets",
+    previously: "Amini, Bayobab, MTN Group",
+    bio: "Deep relationships with multilateral development institutions, insurers, and national governments. Drives commercial strategy and partnerships at Aixatech. Helped raise $6m+ backed by Salesforce at Amini.",
   },
   {
-    name: "Rajiv Menon",
-    role: "Chief Technology Officer",
-    bio: "Previously led national ID infrastructure at scale for 200M+ citizens. Deep expertise in privacy-preserving systems.",
+    name: "Leo Araujo",
+    role: "CTO",
+    background: "ML, AI, Hardware & Systems",
+    previously: "Amini, ARM, Apple, Huawei",
+    bio: "Led the core data platform development and scaling across Africa and emerging markets, previously deployed with AfDB and Aon reaching 1.2M+ farmers. Architects Aixatech's sovereign data and climate analytics stack.",
   },
   {
-    name: "Fatima Al-Rashid",
-    role: "VP of Government Relations",
-    bio: "Former policy advisor to three MENA governments. Expert in digital regulation and procurement frameworks.",
+    name: "Dr. Frederic Schepens",
+    role: "Strategic Advisor",
+    background: "Legal, Digital Infrastructure",
+    previously: "Bayobab Group, MTN Group",
+    bio: "Led legal and business development for digital infrastructure across emerging markets. 30+ years of experience. Former CEO of Bayobab Group — MTN's fibre subsidiary — scaled to $350M in annual revenue.",
   },
   {
-    name: "Dr. Kwame Asante",
-    role: "Head of AI & Engineering",
-    bio: "PhD in distributed systems from ETH Zürich. Built AI infrastructure at a leading European govtech company.",
+    name: "Daniel Abunu",
+    role: "Strategic Advisor",
+    background: "ML, AI, Hardware & Systems",
+    previously: "Tony Blair Institute",
+    bio: "Built ML models and edge hardware systems deployed at global scale. 25+ years across corporate, startup, and public sector. Successfully led multiple startups to profitability. Currently advises the Tony Blair Institute on Technology & Innovation.",
   },
 ];
 
@@ -27,34 +35,32 @@ const TeamSection = () => {
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-            Leadership
+            The Team
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            Built by people who understand the mission.
+            Operators who've done this before.
           </h2>
-          <p className="mt-4 font-body text-base text-muted-foreground">
-            Our team combines deep public sector experience with world-class engineering capability.
-          </p>
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {team.map((member) => (
-            <div
-              key={member.name}
-              className="border border-border bg-card p-6"
-            >
-              <div className="mb-4 flex h-16 w-16 items-center justify-center bg-primary font-mono text-lg font-bold text-primary-foreground">
+            <div key={member.name} className="border border-border bg-card p-6">
+              <div
+                className="mb-4 flex h-14 w-14 items-center justify-center font-mono text-base font-bold text-white"
+                style={{ background: "hsl(33,65%,50%)" }}
+              >
                 {member.name.split(" ").map((n) => n[0]).join("")}
               </div>
-              <h3 className="font-display text-base font-bold text-card-foreground">
-                {member.name}
-              </h3>
+              <h3 className="font-display text-base font-bold text-card-foreground">{member.name}</h3>
               <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
                 {member.role}
               </p>
-              <p className="mt-3 font-body text-sm leading-relaxed text-muted-foreground">
-                {member.bio}
-              </p>
+              <p className="mt-3 font-body text-sm leading-relaxed text-muted-foreground">{member.bio}</p>
+              <div className="mt-4 border-t border-border pt-4">
+                <p className="font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground/60">
+                  Previously: {member.previously}
+                </p>
+              </div>
             </div>
           ))}
         </div>

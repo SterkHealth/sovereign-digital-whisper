@@ -1,89 +1,29 @@
-import {
-  Fingerprint,
-  CreditCard,
-  Database,
-  FolderKanban,
-  Bot,
-  ShieldCheck,
-  Sparkles,
-  Siren,
-  LineChart,
-  Scale,
-} from "lucide-react";
+import { Download, Cpu, Shield, Zap } from "lucide-react";
 
-const stackLayers = [
+const steps = [
   {
-    icon: Fingerprint,
-    label: "Layer 1",
-    title: "Identity Core",
+    icon: Download,
+    step: "Ingest",
     description:
-      "Digital identity, verification APIs, and consent primitives that establish trust across all services.",
+      "Satellite imagery, weather station feeds, IoT sensors, and government datasets ingested, validated, and harmonised in real time.",
   },
   {
-    icon: CreditCard,
-    label: "Layer 2",
-    title: "Wallet & Payments Rail",
+    icon: Cpu,
+    step: "Process",
     description:
-      "Interoperable rails for G2P transfers, fees, subsidies, merchant payments, and settlement workflows.",
+      "ML models produce crop health indices, climate risk scores, and yield forecasts at plot-level resolution, localised for each country.",
   },
   {
-    icon: Database,
-    label: "Layer 3",
-    title: "Data Exchange Layer",
+    icon: Shield,
+    step: "Govern",
     description:
-      "Consent-based, auditable data sharing between ministries and regulated entities with policy controls.",
+      "Data is stored and processed within national borders on sovereign infrastructure. No foreign cloud dependency.",
   },
   {
-    icon: FolderKanban,
-    label: "Layer 4",
-    title: "Registry & Case Management",
+    icon: Zap,
+    step: "Actionable",
     description:
-      "Registries, eligibility, and case workflows that power real government operations—not just portals.",
-  },
-  {
-    icon: Bot,
-    label: "Layer 5",
-    title: "AI Operations Layer",
-    description:
-      "AI-native workflows, copilots, and monitoring that help agencies run programs with speed and integrity.",
-  },
-];
-
-const aiCapabilities = [
-  {
-    icon: Sparkles,
-    title: "AI-native workflows",
-    description:
-      "Automate routine steps across onboarding, verification, eligibility, and service delivery—end to end.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "AI-assisted case management",
-    description:
-      "Triage, queue routing, document understanding, and next-best-action suggestions for caseworkers.",
-  },
-  {
-    icon: Siren,
-    title: "Fraud detection across ID + wallet",
-    description:
-      "Cross-signal anomaly detection to reduce duplicate identities, leakage, and suspicious transfers.",
-  },
-  {
-    icon: Scale,
-    title: "AI-powered regulatory monitoring",
-    description:
-      "Policy guardrails, compliance checks, and alerting embedded into system operations and audit trails.",
-  },
-];
-
-const categoryCompare = [
-  {
-    title: "Legacy gov tech",
-    bullets: ["Monolithic systems", "Vendor-locked upgrades", "Paper-driven operations", "Slow change cycles"],
-  },
-  {
-    title: "AI-native gov OS",
-    bullets: ["Modular by default", "Data-layered + interoperable", "Automated operations", "Self-improving feedback loops"],
+      "Enterprise, governments, insurers, and development organisations receive decision-ready APIs, dashboards, and alerts to act with confidence.",
   },
 ];
 
@@ -92,121 +32,65 @@ const WhatWeBuildSection = () => {
     <section id="what-we-build" className="section-padding bg-background">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-            Architecture
+            How It Works
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            The AI-native Government Stack
+            From Raw Data to Decision-Ready Intelligence.
           </h2>
           <p className="mt-4 font-body text-base text-muted-foreground">
-            A modular, sovereign stack that governments own and operate—layer by layer—starting with the
-            highest-impact capability.
+            We're the plumbing system for Africa's agricultural economy. Building the pipes that carry
+            climate and land intelligence to the institutions, insurers, and governments that need it to flow.
           </p>
         </div>
 
-        {/* Stack Layers */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {stackLayers.map((l) => (
-            <div key={l.title} className="card-hover border border-border bg-card p-7">
-              <div className="mb-4 flex items-center gap-3">
-                <div className="inline-flex border border-border bg-secondary p-2.5">
-                  <l.icon size={18} className="text-foreground" />
+        {/* Steps */}
+        <div className="mt-14 grid gap-0 md:grid-cols-4">
+          {steps.map((s, i) => (
+            <div key={s.step} className="relative pb-10 md:pb-0">
+              {i < steps.length - 1 && (
+                <div className="absolute left-6 top-12 hidden h-px w-full bg-border md:block" />
+              )}
+              <div className="relative">
+                <div
+                  className="mb-4 flex h-12 w-12 items-center justify-center font-mono text-sm font-bold"
+                  style={{ background: "hsl(33,65%,50%)", color: "#fff" }}
+                >
+                  <s.icon size={20} />
                 </div>
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                  {l.label}
-                </span>
+                <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+                  Step {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="font-display text-lg font-bold text-foreground">{s.step}</h3>
+                <p className="mt-2 max-w-xs font-body text-sm leading-relaxed text-muted-foreground">
+                  {s.description}
+                </p>
               </div>
-
-              <h3 className="font-display text-base font-bold text-card-foreground">{l.title}</h3>
-              <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">{l.description}</p>
             </div>
           ))}
         </div>
 
-        {/* AI Layer callout */}
+        {/* Capabilities row */}
         <div className="mt-16 border border-border bg-card p-8">
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-            AI Layer
+            What flows through the platform
           </p>
-          <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-card-foreground">
-            AI embedded at the infrastructure layer — not bolted on at the application layer.
-          </h3>
-          <p className="mt-3 max-w-3xl font-body text-sm leading-relaxed text-muted-foreground">
-            The platform is designed so AI can operate on verified identity signals, consented data access,
-            and payment events—safely, auditable, and policy-controlled.
-          </p>
-
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {aiCapabilities.map((c) => (
-              <div key={c.title} className="border border-border bg-background p-6">
-                <div className="mb-4 inline-flex border border-border bg-secondary p-2.5">
-                  <c.icon size={18} className="text-foreground" />
-                </div>
-                <h4 className="font-display text-sm font-bold text-foreground">{c.title}</h4>
-                <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">{c.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Sovereign framing (replaces “knowledge transfer” vibe) */}
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
-          <div className="border border-border bg-card p-7">
-            <h4 className="font-display text-base font-bold text-card-foreground">Sovereign deployment model</h4>
-            <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">
-              Deploy in-country or on approved cloud infrastructure with policy controls aligned to your state.
-            </p>
-          </div>
-          <div className="border border-border bg-card p-7">
-            <h4 className="font-display text-base font-bold text-card-foreground">Full state ownership</h4>
-            <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">
-              Government owns the platform configuration, audit trails, and operational controls—built for long-term autonomy.
-            </p>
-          </div>
-          <div className="border border-border bg-card p-7">
-            <h4 className="font-display text-base font-bold text-card-foreground">Infrastructure that remains</h4>
-            <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">
-              A durable national capability that keeps running and evolving—without relying on external vendors to function.
-            </p>
-          </div>
-        </div>
-
-        {/* Category Definition */}
-        <div className="mt-16">
-          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-            Category
-          </p>
-          <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-foreground">
-            A New Category: AI-Native Government Infrastructure
-          </h3>
-          <p className="mt-3 max-w-3xl font-body text-sm leading-relaxed text-muted-foreground">
-            This is not another government portal or custom system build. It’s an operating layer for public services:
-            modular, interoperable, automated—and designed to improve as it runs.
-          </p>
-
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            {categoryCompare.map((col) => (
-              <div key={col.title} className="border border-border bg-card p-7">
-                <h4 className="font-display text-base font-bold text-card-foreground">{col.title}</h4>
-                <ul className="mt-4 space-y-2">
-                  {col.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="mt-[6px] h-1.5 w-1.5 rounded-full bg-muted-foreground/40" />
-                      <span className="font-body leading-relaxed">{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Optional tiny proof-style footer row */}
-          <div className="mt-8 flex flex-wrap gap-2">
-            {["Modular", "Interoperable", "Auditable", "Policy-controlled", "AI-native operations"].map((t) => (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {[
+              "Satellite Imagery",
+              "IoT Sensor Data",
+              "Weather Station Feeds",
+              "Soil Chemistry",
+              "Crop Health Indices",
+              "Yield Forecasts",
+              "Climate Risk Scores",
+              "Farmer Profiles",
+              "Parametric Triggers",
+            ].map((t) => (
               <span
                 key={t}
-                className="border border-border bg-card px-3 py-1 font-mono text-[11px] text-muted-foreground"
+                className="border border-border bg-background px-3 py-1 font-mono text-[11px] text-muted-foreground"
               >
                 {t}
               </span>
@@ -219,4 +103,3 @@ const WhatWeBuildSection = () => {
 };
 
 export default WhatWeBuildSection;
-
