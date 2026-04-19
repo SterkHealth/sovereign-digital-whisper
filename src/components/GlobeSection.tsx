@@ -1,70 +1,245 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef } from "react";
 
-// Data flows FROM Global South origins TO Global North destinations
-const arcsData = [
-  { startLat: -1.29, startLng: 36.82, endLat: 51.5, endLng: -0.12 },    // Nairobi → London
-  { startLat: 6.37, startLng: -2.38, endLat: 48.85, endLng: 2.35 },     // Accra → Paris
-  { startLat: -26.2, startLng: 28.04, endLat: 40.71, endLng: -74.01 },  // Johannesburg → New York
-  { startLat: 9.14, startLng: 40.49, endLat: 52.52, endLng: 13.4 },     // Addis Ababa → Berlin
-  { startLat: 14.47, startLng: -14.45, endLat: 45.42, endLng: -75.69 }, // Dakar → Ottawa
-  { startLat: 0.34, startLng: 32.58, endLat: 51.5, endLng: -0.12 },     // Kampala → London
-  { startLat: -3.38, startLng: 29.36, endLat: 48.85, endLng: 2.35 },    // Bujumbura → Paris
-  { startLat: 12.36, startLng: -1.53, endLat: 40.71, endLng: -74.01 },  // Ouagadougou → New York
+const DEG = Math.PI / 180;
+
+// [lat, lon] in degrees
+const ORIGINS: [number, number][] = [
+  [-1.29, 36.82],   // Nairobi
+  [6.37, -2.38],    // Accra
+  [-26.2, 28.04],   // Johannesburg
+  [9.14, 40.49],    // Addis Ababa
+  [14.47, -14.45],  // Dakar
+  [0.34, 32.58],    // Kampala
+  [-3.38, 29.36],   // Bujumbura
+  [12.36, -1.53],   // Ouagadougou
 ];
 
-const originPoints = [
-  { lat: -1.29, lng: 36.82 },
-  { lat: 6.37, lng: -2.38 },
-  { lat: -26.2, lng: 28.04 },
-  { lat: 9.14, lng: 40.49 },
-  { lat: 14.47, lng: -14.45 },
-  { lat: 0.34, lng: 32.58 },
-  { lat: -3.38, lng: 29.36 },
-  { lat: 12.36, lng: -1.53 },
+const DESTINATIONS: [number, number][] = [
+  [51.5, -0.12],    // London
+  [48.85, 2.35],    // Paris
+  [40.71, -74.01],  // New York
+  [52.52, 13.4],    // Berlin
+  [45.42, -75.69],  // Ottawa
 ];
+
+const ARCS: [[number, number], [number, number]][] = [
+  [ORIGINS[0], DESTINATIONS[0]],
+  [ORIGINS[1], DESTINATIONS[1]],
+  [ORIGINS[2], DESTINATIONS[2]],
+  [ORIGINS[3], DESTINATIONS[3]],
+  [ORIGINS[4], DESTINATIONS[4]],
+  [ORIGINS[5], DESTINATIONS[0]],
+  [ORIGINS[6], DESTINATIONS[1]],
+  [ORIGINS[7], DESTINATIONS[2]],
+];
+
+// Orthographic projection centred on (lat0, lon0) with lon offset for rotation
+function project(
+  lat: number, lon: number,
+  lat0: number, lonOffset: number,
+  R: number, cx: number, cy: number
+): { x: number; y: number; visible: boolean } {
+  const φ = lat * DEG;
+  const λ = (lon + lonOffset) * DEG;
+  const φ0 = lat0 * DEG;
+
+  const cosC =
+    Math.sin(φ0) * Math.sin(φ) +
+    Math.cos(φ0) * Math.cos(φ) * Math.cos(λ);
+
+  const x = R * Math.cos(φ) * Math.sin(λ);
+  const y = R * (Math.cos(φ0) * Math.sin(φ) - Math.sin(φ0) * Math.cos(φ) * Math.cos(λ));
+
+  return { x: cx + x, y: cy - y, visible: cosC > 0 };
+}
+
+// Interpolate points along a great circle arc
+function greatCirclePoints(
+  a: [number, number], b: [number, number], steps = 60
+): [number, number][] {
+  const [lat1, lon1] = a.map(v => v * DEG);
+  const [lat2, lon2] = b.map(v => v * DEG);
+  const pts: [number, number][] = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const A = Math.sin((1 - t) * Math.PI) / Math.sin(Math.PI); // dummy slerp weight
+    // Linear interpolation on sphere (simplified)
+    const lat = lat1 + (lat2 - lat1) * t;
+    const lon = lon1 + (lon2 - lon1) * t;
+    pts.push([lat / DEG, lon / DEG]);
+  }
+  return pts;
+}
 
 export default function GlobeSection() {
-  const globeEl = useRef<any>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [Globe, setGlobe] = useState<any>(null);
-  const [size, setSize] = useState(480);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const frameRef = useRef<number>(0);
+  const rotRef = useRef(20); // starting lon offset (centre Africa)
 
-  // Lazy-load the globe library (it's ~2MB)
   useEffect(() => {
-    import("react-globe.gl").then((m) => setGlobe(() => m.default));
-  }, []);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-  // Responsive sizing
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const ro = new ResizeObserver(() => {
-      const w = containerRef.current?.clientWidth ?? 480;
-      setSize(Math.min(w, 560));
-    });
-    ro.observe(containerRef.current);
-    return () => ro.disconnect();
-  }, [Globe]);
+    // Arc animation offsets — stagger each arc's phase
+    const arcPhases = ARCS.map((_, i) => (i / ARCS.length) * 2 * Math.PI);
+    const arcPts = ARCS.map(([a, b]) => greatCirclePoints(a, b, 80));
 
-  const onGlobeReady = useCallback(() => {
-    const g = globeEl.current;
-    if (!g) return;
-    // Centre on Africa
-    g.pointOfView({ lat: 5, lng: 20, altitude: 2.0 });
-    const controls = g.controls();
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.35;
-    controls.enableZoom = false;
-    controls.enablePan = false;
-    // Override globe material to dark green
-    import("three").then(({ MeshPhongMaterial, Color }) => {
-      g.globeMaterial?.(
-        new MeshPhongMaterial({
-          color: new Color(0x0a1a0c),
-          emissive: new Color(0x040d05),
-          shininess: 10,
-        })
-      );
-    });
+    function draw(ts: number) {
+      const dpr = window.devicePixelRatio || 1;
+      const W = canvas!.clientWidth;
+      const H = canvas!.clientHeight;
+      if (canvas!.width !== W * dpr || canvas!.height !== H * dpr) {
+        canvas!.width = W * dpr;
+        canvas!.height = H * dpr;
+        ctx!.scale(dpr, dpr);
+      }
+
+      ctx!.clearRect(0, 0, W, H);
+
+      const R = Math.min(W, H) * 0.42;
+      const cx = W / 2;
+      const cy = H / 2;
+      const lat0 = 10; // tilt view slightly north
+      const lon0 = rotRef.current;
+
+      // Slow rotation
+      rotRef.current += 0.08;
+
+      // ── Globe sphere ──────────────────────────────────────────
+      const grad = ctx!.createRadialGradient(cx - R * 0.2, cy - R * 0.2, R * 0.05, cx, cy, R);
+      grad.addColorStop(0, "#1a3d1e");
+      grad.addColorStop(0.5, "#0a1a0c");
+      grad.addColorStop(1, "#040d05");
+      ctx!.beginPath();
+      ctx!.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx!.fillStyle = grad;
+      ctx!.fill();
+
+      // Outer glow
+      const glow = ctx!.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * 1.18);
+      glow.addColorStop(0, "rgba(30,90,35,0.3)");
+      glow.addColorStop(0.5, "rgba(15,50,20,0.12)");
+      glow.addColorStop(1, "rgba(0,0,0,0)");
+      ctx!.beginPath();
+      ctx!.arc(cx, cy, R * 1.18, 0, Math.PI * 2);
+      ctx!.fillStyle = glow;
+      ctx!.fill();
+
+      // ── Lat/lon grid ─────────────────────────────────────────
+      ctx!.save();
+      ctx!.beginPath();
+      ctx!.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx!.clip();
+      ctx!.strokeStyle = "rgba(60,140,70,0.18)";
+      ctx!.lineWidth = 0.5;
+
+      // Parallels
+      for (let lat = -75; lat <= 75; lat += 15) {
+        const pts: { x: number; y: number; visible: boolean }[] = [];
+        for (let lon = -180; lon <= 180; lon += 3) {
+          pts.push(project(lat, lon, lat0, lon0, R, cx, cy));
+        }
+        ctx!.beginPath();
+        let started = false;
+        for (const p of pts) {
+          if (!p.visible) { started = false; continue; }
+          if (!started) { ctx!.moveTo(p.x, p.y); started = true; }
+          else ctx!.lineTo(p.x, p.y);
+        }
+        ctx!.stroke();
+      }
+
+      // Meridians
+      for (let lon = -180; lon < 180; lon += 15) {
+        const pts: { x: number; y: number; visible: boolean }[] = [];
+        for (let lat = -90; lat <= 90; lat += 2) {
+          pts.push(project(lat, lon, lat0, lon0, R, cx, cy));
+        }
+        ctx!.beginPath();
+        let started = false;
+        for (const p of pts) {
+          if (!p.visible) { started = false; continue; }
+          if (!started) { ctx!.moveTo(p.x, p.y); started = true; }
+          else ctx!.lineTo(p.x, p.y);
+        }
+        ctx!.stroke();
+      }
+      ctx!.restore();
+
+      // ── Animated arcs ─────────────────────────────────────────
+      const speed = ts * 0.0004; // 0–1 progress over time
+      ARCS.forEach((_, i) => {
+        const pts = arcPts[i];
+        const phase = arcPhases[i];
+        // head position (0–1) advances with time
+        const head = ((speed + phase / (2 * Math.PI)) % 1);
+        const tailLen = 0.28; // fraction of arc shown as tail
+
+        const headIdx = Math.floor(head * (pts.length - 1));
+        const tailIdx = Math.max(0, Math.floor((head - tailLen) * (pts.length - 1)));
+
+        // Draw tail with gradient opacity
+        for (let j = tailIdx; j < headIdx; j++) {
+          const p1 = project(pts[j][0], pts[j][1], lat0, lon0, R, cx, cy);
+          const p2 = project(pts[j + 1]?.[0] ?? pts[j][0], pts[j + 1]?.[1] ?? pts[j][1], lat0, lon0, R, cx, cy);
+          if (!p1.visible || !p2.visible) continue;
+
+          const frac = (j - tailIdx) / (headIdx - tailIdx);
+          ctx!.beginPath();
+          ctx!.moveTo(p1.x, p1.y);
+          ctx!.lineTo(p2.x, p2.y);
+          ctx!.strokeStyle = `rgba(200,125,48,${frac * 0.85})`;
+          ctx!.lineWidth = 1.5;
+          ctx!.stroke();
+        }
+
+        // Head glow dot
+        if (headIdx < pts.length) {
+          const hp = project(pts[headIdx][0], pts[headIdx][1], lat0, lon0, R, cx, cy);
+          if (hp.visible) {
+            const hg = ctx!.createRadialGradient(hp.x, hp.y, 0, hp.x, hp.y, 5);
+            hg.addColorStop(0, "rgba(200,125,48,0.95)");
+            hg.addColorStop(1, "rgba(200,125,48,0)");
+            ctx!.beginPath();
+            ctx!.arc(hp.x, hp.y, 5, 0, Math.PI * 2);
+            ctx!.fillStyle = hg;
+            ctx!.fill();
+          }
+        }
+      });
+
+      // ── Origin pulsing dots ───────────────────────────────────
+      ORIGINS.forEach(([lat, lon]) => {
+        const p = project(lat, lon, lat0, lon0, R, cx, cy);
+        if (!p.visible) return;
+        const pulse = 0.5 + 0.5 * Math.sin(ts * 0.003 + lat);
+        // Outer ring
+        ctx!.beginPath();
+        ctx!.arc(p.x, p.y, 3 + pulse * 3, 0, Math.PI * 2);
+        ctx!.strokeStyle = `rgba(74,222,128,${0.4 * pulse})`;
+        ctx!.lineWidth = 1;
+        ctx!.stroke();
+        // Core dot
+        ctx!.beginPath();
+        ctx!.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+        ctx!.fillStyle = "rgba(74,222,128,0.9)";
+        ctx!.fill();
+      });
+
+      // ── Globe edge ────────────────────────────────────────────
+      ctx!.beginPath();
+      ctx!.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx!.strokeStyle = "rgba(50,110,55,0.35)";
+      ctx!.lineWidth = 1;
+      ctx!.stroke();
+
+      frameRef.current = requestAnimationFrame(draw);
+    }
+
+    frameRef.current = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(frameRef.current);
   }, []);
 
   return (
@@ -85,19 +260,17 @@ export default function GlobeSection() {
             </p>
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
               Data flows out.{" "}
-              <span className="text-white/55">
-                Intelligence doesn't flow back.
-              </span>
+              <span className="text-white/55">Intelligence doesn't flow back.</span>
             </h2>
             <p className="mt-5 font-body text-base leading-relaxed text-white/60">
-              Agricultural and climate data from the Global South flows to
-              servers in the Global North — processed, packaged, and sold back
-              at prices the originating nations cannot afford or govern.
+              Agricultural and climate data from the Global South flows to servers
+              in the Global North — processed, packaged, and sold back at prices
+              the originating nations cannot afford or govern.
             </p>
             <p className="mt-4 font-body text-sm leading-relaxed text-white/45">
-              Aixatech closes the loop. We keep data sovereign, process it
-              within national borders, and return decision-ready intelligence to
-              the governments, insurers, and institutions that need it most.
+              Aixatech closes the loop. We keep data sovereign, process it within
+              national borders, and return decision-ready intelligence to the
+              governments, insurers, and institutions that need it most.
             </p>
             <div className="mt-8 flex flex-col gap-3">
               {[
@@ -116,42 +289,13 @@ export default function GlobeSection() {
             </div>
           </div>
 
-          {/* Globe */}
-          <div ref={containerRef} className="flex items-center justify-center">
-            {Globe ? (
-              <Globe
-                ref={globeEl}
-                onGlobeReady={onGlobeReady}
-                width={size}
-                height={size}
-                backgroundColor="rgba(0,0,0,0)"
-                showGraticules
-                atmosphereColor="#1f5c28"
-                atmosphereAltitude={0.2}
-                arcsData={arcsData}
-                arcColor={() => "rgba(200,125,48,0.9)"}
-                arcAltitude={0.35}
-                arcStroke={0.6}
-                arcDashLength={0.35}
-                arcDashGap={0.15}
-                arcDashAnimateTime={1800}
-                pointsData={originPoints}
-                pointColor={() => "#4ade80"}
-                pointAltitude={0.015}
-                pointRadius={0.4}
-              />
-            ) : (
-              // Placeholder while the library loads
-              <div
-                className="rounded-full"
-                style={{
-                  width: size,
-                  height: size,
-                  background:
-                    "radial-gradient(circle at 35% 38%, #0d2010, #040d05)",
-                }}
-              />
-            )}
+          {/* Globe canvas */}
+          <div className="flex items-center justify-center">
+            <canvas
+              ref={canvasRef}
+              className="w-full"
+              style={{ maxWidth: 520, aspectRatio: "1 / 1" }}
+            />
           </div>
         </div>
       </div>
