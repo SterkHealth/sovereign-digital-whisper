@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -19,6 +20,12 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div className="hidden items-center gap-8 md:flex">
+          <Link
+            to="/products"
+            className="font-mono text-[11px] uppercase tracking-[0.1em] text-hero-muted transition-colors hover:text-hero-foreground"
+          >
+            Products
+          </Link>
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -50,6 +57,13 @@ const Navbar = () => {
       {open && (
         <div className="border-t border-hero-foreground/10 bg-hero px-6 py-6 md:hidden">
           <div className="flex flex-col gap-4">
+            <Link
+              to="/products"
+              onClick={() => setOpen(false)}
+              className="font-mono text-[11px] uppercase tracking-[0.1em] text-hero-muted transition-colors hover:text-hero-foreground"
+            >
+              Products
+            </Link>
             {navLinks.map((link) => (
               <a
                 key={link.href}
