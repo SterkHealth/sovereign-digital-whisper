@@ -29,41 +29,51 @@ function arcPoints(a: [number, number], b: [number, number], steps = 80): [numbe
 // ── All city nodes ─────────────────────────────────────────────────────────
 // dy = vertical label offset in px so closely-spaced cities don't stack
 const CITIES: { ll: [number, number]; label: string; dy?: number }[] = [
-  // Africa
+  // Africa (indices 0–6)
   { ll: [-1.29,  36.82], label: "Kenya",         dy:   5 },
-  { ll: [ 6.37,  -2.38], label: "Ghana",         dy:  -8 },  // Ghana above Nigeria
+  { ll: [ 6.37,  -2.38], label: "Ghana",         dy:  -8 },
   { ll: [-26.2,  28.04], label: "South Africa"           },
   { ll: [ 9.14,  40.49], label: "Ethiopia",      dy:  -6 },
   { ll: [14.47, -14.45], label: "Senegal"                },
-  { ll: [ 0.34,  32.58], label: "Uganda",        dy:  -9 },  // Uganda above Kenya
-  { ll: [ 6.37,   3.39], label: "Nigeria",       dy:   8 },  // Nigeria below Ghana
-  // Latin America
+  { ll: [ 0.34,  32.58], label: "Uganda",        dy:  -9 },
+  { ll: [ 6.37,   3.39], label: "Nigeria",       dy:   8 },
+  // Latin America (7–11)
   { ll: [-15.8,  -47.9], label: "Brazil"                 },
   { ll: [  4.7,  -74.1], label: "Colombia"               },
   { ll: [-34.6,  -58.4], label: "Argentina"              },
   { ll: [ 19.4,  -99.1], label: "Mexico"                 },
   { ll: [-12.0,  -77.0], label: "Peru"                   },
-  // Europe — stagger all four so they never sit on the same line
-  { ll: [ 51.5,   -0.12], label: "London",       dy: -20 },  // top-left of cluster
-  { ll: [ 48.85,   2.35], label: "Paris",        dy:  -6 },  // mid-left
-  { ll: [ 52.52,  13.4 ], label: "Berlin",       dy: -20 },  // top-right of cluster
-  { ll: [ 41.9,   12.5 ], label: "Rome",         dy:   6 },  // bottom of cluster
-  // North America
-  { ll: [ 40.71,  -74.01], label: "New York",    dy:   7 },  // below Ottawa
+  // Europe (12–15)
+  { ll: [ 51.5,   -0.12], label: "London",       dy: -20 },
+  { ll: [ 48.85,   2.35], label: "Paris",        dy:  -6 },
+  { ll: [ 52.52,  13.4 ], label: "Berlin",       dy: -20 },
+  { ll: [ 41.9,   12.5 ], label: "Rome",         dy:   6 },
+  // North America (16–18)
+  { ll: [ 40.71,  -74.01], label: "New York",    dy:   7 },
   { ll: [ 37.8,  -122.4 ], label: "San Francisco"        },
-  { ll: [ 45.42,  -75.69], label: "Ottawa",      dy:  -7 },  // above New York
-  // Asia
+  { ll: [ 45.42,  -75.69], label: "Ottawa",      dy:  -7 },
+  // Asia (19–23)
   { ll: [ 20.6,   78.9  ], label: "India"                },
   { ll: [  1.35, 103.82  ], label: "Singapore"           },
-  { ll: [ 35.7,  139.7  ], label: "Tokyo",       dy:  -8 },  // above Shanghai
-  { ll: [ 31.2,  121.5  ], label: "Shanghai",    dy:   8 },  // below Tokyo
+  { ll: [ 35.7,  139.7  ], label: "Tokyo",       dy:  -8 },
+  { ll: [ 31.2,  121.5  ], label: "Shanghai",    dy:   8 },
   { ll: [ -6.2,  106.8  ], label: "Jakarta"              },
-  // Australia
+  // Australia / Pacific (24–26)
   { ll: [-33.9,  151.2  ], label: "Sydney"               },
+  { ll: [-36.9,  174.8  ], label: "Auckland",    dy:   8 }, // 25 — fills Sydney→Hawaii gap
+  { ll: [ 21.3, -157.8  ], label: "Hawaii",      dy:  -7 }, // 26 — fills Asia→US Pacific gap
+  // Middle East / Central Asia (27–28) — fills 40°→78° gap
+  { ll: [ 25.2,   55.3  ], label: "Dubai",       dy:  -7 },
+  { ll: [ 19.1,   72.9  ], label: "Mumbai",      dy:   7 },
+  // Extra Americas / Caribbean (29) — fills 58°→99° gap
+  { ll: [ 10.5,  -66.9  ], label: "Venezuela",   dy:  -7 },
+  // Central/East Africa (30) — longitude bridge
+  { ll: [-6.17,   35.74], label: "Tanzania",     dy:   8 },
 ];
 
 // Arc pairs [from-index, to-index]
 const ARC_PAIRS: [number, number][] = [
+  // Africa → Europe
   [ 0, 12], // Kenya → London
   [ 1, 13], // Ghana → Paris
   [ 2, 14], // South Africa → Berlin
@@ -71,23 +81,37 @@ const ARC_PAIRS: [number, number][] = [
   [ 4, 13], // Senegal → Paris
   [ 5, 12], // Uganda → London
   [ 6, 15], // Nigeria → Rome
+  // Africa → Middle East
+  [ 0, 27], // Kenya → Dubai
+  [ 3, 27], // Ethiopia → Dubai
+  [27, 19], // Dubai → India
+  [27, 28], // Dubai → Mumbai
+  [28, 20], // Mumbai → Singapore
+  // Latin America → Europe / N. America
   [ 7, 14], // Brazil → Berlin
   [ 8, 16], // Colombia → New York
   [ 9, 12], // Argentina → London
   [10, 17], // Mexico → San Francisco
   [11, 17], // Peru → San Francisco
+  [29, 16], // Venezuela → New York
+  // Europe ↔ Asia
   [19, 12], // India → London
+  [15, 19], // Rome → India
+  [22, 14], // Shanghai → Berlin
+  // Asia internal
   [19, 20], // India → Singapore
   [20, 21], // Singapore → Tokyo
-  [20, 17], // Singapore → San Francisco
+  [20, 23], // Singapore → Jakarta
   [21, 22], // Tokyo → Shanghai
+  // Pacific chain: Sydney → Auckland → Hawaii → San Francisco → Tokyo
+  [24, 25], // Sydney → Auckland
+  [25, 26], // Auckland → Hawaii
+  [26, 17], // Hawaii → San Francisco
+  [26, 21], // Hawaii → Tokyo
   [24, 20], // Sydney → Singapore
-  [24, 17], // Sydney → San Francisco
-  [23, 20], // Jakarta → Singapore
+  // Cross-Pacific
   [ 7, 17], // Brazil → San Francisco
   [ 8, 13], // Colombia → Paris
-  [22, 14], // Shanghai → Berlin
-  [15, 19], // Rome → India
 ];
 
 const ARCS = ARC_PAIRS.map(([i, j], idx) => ({
@@ -99,14 +123,16 @@ const ARCS = ARC_PAIRS.map(([i, j], idx) => ({
 
 // Faint background country/region labels
 const BG_LABELS: { ll: [number, number]; label: string }[] = [
-  { ll: [ 0.0,  20.0 ], label: "AFRICA"       },
-  { ll: [ 0.0, -60.0 ], label: "SOUTH AMERICA"},
-  { ll: [40.0, -100.0], label: "NORTH AMERICA" },
-  { ll: [50.0,  15.0 ], label: "EUROPE"        },
-  { ll: [35.0,  90.0 ], label: "ASIA"          },
-  { ll: [-25.0, 135.0], label: "AUSTRALIA"     },
-  { ll: [ 0.0, -30.0 ], label: "ATLANTIC"      },
-  { ll: [ 0.0,  70.0 ], label: "INDIAN OCEAN"  },
+  { ll: [ 0.0,  20.0 ], label: "AFRICA"        },
+  { ll: [ 0.0, -60.0 ], label: "SOUTH AMERICA" },
+  { ll: [40.0, -100.0], label: "NORTH AMERICA"  },
+  { ll: [50.0,  15.0 ], label: "EUROPE"         },
+  { ll: [35.0,  90.0 ], label: "ASIA"           },
+  { ll: [-25.0, 135.0], label: "AUSTRALIA"      },
+  { ll: [ 0.0, -30.0 ], label: "ATLANTIC"       },
+  { ll: [ 0.0,  70.0 ], label: "INDIAN OCEAN"   },
+  { ll: [ 5.0, -150.0], label: "PACIFIC"        },
+  { ll: [30.0,  55.0 ], label: "MIDDLE EAST"    },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
