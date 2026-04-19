@@ -107,17 +107,21 @@ const differentiators = [
 
 const SolutionSection = () => {
   return (
-    <section id="solutions" className="section-padding bg-section-alt">
+    <section
+      id="solutions"
+      className="section-padding"
+      style={{ background: "radial-gradient(ellipse at 25% 60%, #0d2010 0%, #051008 40%, #000000 75%)" }}
+    >
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="max-w-2xl">
-          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
             The Platform
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
             1 Platform. 3 Modules.
           </h2>
-          <p className="mt-4 font-body text-base text-muted-foreground">
+          <p className="mt-4 font-body text-base text-white/55">
             A single platform that powers climate risk decisions, unlocks agricultural finance, and gives
             nations sovereignty over their own data.
           </p>
@@ -126,22 +130,26 @@ const SolutionSection = () => {
         {/* 3 Modules */}
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {modules.map((m) => (
-            <div key={m.title} className="card-hover border border-border bg-card p-8 flex flex-col">
+            <div
+              key={m.title}
+              className="card-hover flex flex-col border border-white/10 p-8"
+              style={{ background: "rgba(255,255,255,0.03)" }}
+            >
               <div className="mb-5 flex items-center justify-between">
-                <div className="inline-flex bg-primary p-3">
-                  <m.icon size={20} className="text-primary-foreground" />
+                <div className="inline-flex p-3" style={{ background: "hsl(33,65%,50%)" }}>
+                  <m.icon size={20} className="text-white" />
                 </div>
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
                   Module {m.number}
                 </span>
               </div>
-              <h3 className="font-display text-xl font-bold text-card-foreground">{m.title}</h3>
-              <p className="mt-3 font-body text-sm leading-relaxed text-muted-foreground flex-1">
+              <h3 className="font-display text-xl font-bold text-white">{m.title}</h3>
+              <p className="mt-3 font-body text-sm leading-relaxed text-white/55 flex-1">
                 {m.description}
               </p>
               <ul className="mt-5 space-y-2">
                 {m.capabilities.map((c) => (
-                  <li key={c} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <li key={c} className="flex items-start gap-2 text-sm text-white/55">
                     <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "hsl(33,65%,50%)" }} />
                     <span className="font-body leading-relaxed">{c}</span>
                   </li>
@@ -157,13 +165,13 @@ const SolutionSection = () => {
         {/* Pipeline */}
         <div className="mt-20">
           <div className="max-w-2xl">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
               How the platform works
             </p>
-            <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-foreground">
+            <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-white">
               From raw data to decision-ready intelligence.
             </h3>
-            <p className="mt-3 font-body text-sm text-muted-foreground">
+            <p className="mt-3 font-body text-sm text-white/55">
               End-to-end sovereign infrastructure — ingesting raw earth observation and climate data and
               delivering actionable intelligence entirely within national borders.
             </p>
@@ -171,7 +179,11 @@ const SolutionSection = () => {
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {pipeline.map((p) => (
-              <div key={p.title} className="border border-border bg-card p-7">
+              <div
+                key={p.title}
+                className="border border-white/10 p-7"
+                style={{ background: "rgba(255,255,255,0.03)" }}
+              >
                 <div className="mb-4 flex items-center gap-3">
                   <div
                     className="flex h-9 w-9 items-center justify-center font-mono text-xs font-bold text-white"
@@ -179,10 +191,10 @@ const SolutionSection = () => {
                   >
                     {p.step}
                   </div>
-                  <p.icon size={18} className="text-muted-foreground" />
+                  <p.icon size={18} className="text-white/40" />
                 </div>
-                <h4 className="font-display text-base font-bold text-card-foreground">{p.title}</h4>
-                <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">{p.description}</p>
+                <h4 className="font-display text-base font-bold text-white">{p.title}</h4>
+                <p className="mt-2 font-body text-sm leading-relaxed text-white/55">{p.description}</p>
               </div>
             ))}
           </div>
@@ -190,37 +202,44 @@ const SolutionSection = () => {
 
         {/* Why Aixatech */}
         <div className="mt-20">
-          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
             Why Aixatech
           </p>
-          <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-foreground">
+          <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-white">
             Infrastructure built for the Global South.
           </h3>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {differentiators.map((d) => (
-              <div key={d.title} className="border border-border bg-card p-6">
-                <div className="mb-4 inline-flex border border-border bg-secondary p-2.5">
-                  <d.icon size={18} className="text-foreground" />
+              <div
+                key={d.title}
+                className="border border-white/10 p-6"
+                style={{ background: "rgba(255,255,255,0.03)" }}
+              >
+                <div className="mb-4 inline-flex border border-white/10 p-2.5" style={{ background: "rgba(255,255,255,0.05)" }}>
+                  <d.icon size={18} className="text-white/70" />
                 </div>
-                <h4 className="font-display text-sm font-bold text-card-foreground">{d.title}</h4>
-                <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">{d.description}</p>
+                <h4 className="font-display text-sm font-bold text-white">{d.title}</h4>
+                <p className="mt-2 font-body text-sm leading-relaxed text-white/55">{d.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Market stats bar */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-3 border border-border bg-card p-8">
+        <div
+          className="mt-16 grid gap-6 sm:grid-cols-3 border border-white/10 p-8"
+          style={{ background: "rgba(255,255,255,0.03)" }}
+        >
           {[
             { stat: "$1.5T", label: "TAM in climate risk analytics and agri data infrastructure across the Global South by 2030" },
-            { stat: "65%", label: "of the world's uncultivated arable land sits in Africa — less than 3% of it is insured" },
-            { stat: "$90B", label: "lost annually to climate-related agricultural disruption across Sub-Saharan Africa" },
+            { stat: "65%",   label: "of the world's uncultivated arable land sits in Africa — less than 3% of it is insured" },
+            { stat: "$90B",  label: "lost annually to climate-related agricultural disruption across Sub-Saharan Africa" },
           ].map((item) => (
             <div key={item.stat} className="text-center">
               <p className="font-display text-4xl font-bold" style={{ color: "hsl(33,65%,50%)" }}>
                 {item.stat}
               </p>
-              <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">{item.label}</p>
+              <p className="mt-2 font-body text-sm leading-relaxed text-white/55">{item.label}</p>
             </div>
           ))}
         </div>

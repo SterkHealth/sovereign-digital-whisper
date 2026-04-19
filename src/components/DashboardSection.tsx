@@ -611,12 +611,6 @@ function ClimateRiskDashboard() {
         </div>
       </div>
 
-      {/* Critical callout */}
-      <CriticalCallout items={[
-        { title: "Vegetation Loss breach", detail: "Index at 81 — threshold 75 exceeded. Parametric payout likely triggered." },
-        { title: "Drought Index warning", detail: "72/100 — 3 pts below payout threshold. Escalating trajectory over 8 days." },
-      ]} />
-
       {/* Metric groups */}
       <div className="grid gap-4 lg:grid-cols-2">
         {climateMetrics.map((grp) => (
@@ -753,12 +747,6 @@ function AgriDataDashboard() {
           <span className="flex items-center gap-1 font-mono text-[8px] text-white/30"><Wifi size={8} />Live</span>
         </div>
       </div>
-
-      {/* Critical callout */}
-      <CriticalCallout items={[
-        { title: "Soil moisture deficit", detail: "18% of Kenya plots below 30% VWC for 14+ days. Irrigation advisory required." },
-        { title: "Wheat yield below average", detail: "Forecast 2.1 t/ha vs 2.4 historical. Credit exposure review recommended." },
-      ]} />
 
       {/* Metric groups */}
       <div className="grid gap-4 lg:grid-cols-2">
