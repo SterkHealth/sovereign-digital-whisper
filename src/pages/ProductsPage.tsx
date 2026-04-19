@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
@@ -274,6 +275,20 @@ const products = [
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function ProductsPage() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+    // Give the page a tick to render before scrolling
+    const id = hash.replace("#", "");
+    const el = document.getElementById(id);
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 80);
+    }
+  }, [hash]);
+
   return (
     <div
       className="min-h-screen text-white"
