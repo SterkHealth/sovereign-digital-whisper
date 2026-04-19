@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 const CALENDLY_URL = "https://calendly.com/eshani-aixatech/30min";
 
@@ -278,6 +279,7 @@ export default function ProductsPage() {
           "radial-gradient(ellipse at 25% 60%, #0d2010 0%, #051008 40%, #000000 75%)",
       }}
     >
+      <Navbar />
       {/* Navbar spacer */}
       <div className="h-[73px]" />
 
@@ -287,7 +289,7 @@ export default function ProductsPage() {
           The Platform
         </p>
         <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
-          Three ways to work with us.
+          One platform. Three entry points.
         </h1>
         <p className="mx-auto mt-5 max-w-lg text-base text-white/55">
           One platform. Modular by design. Deployable at any layer.
