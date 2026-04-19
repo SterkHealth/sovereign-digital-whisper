@@ -1,35 +1,6 @@
-import { useEffect, useRef } from "react";
 import type { MouseEvent } from "react";
 
 const CALENDLY_URL = "https://calendly.com/eshani-aixatech/30min";
-
-// ── Seeded PRNG so stars are always in the same positions ─────
-function lcg(seed: number) {
-  let s = seed;
-  return () => {
-    s = (s * 1664525 + 1013904223) & 0x7fffffff;
-    return s / 0x7fffffff;
-  };
-}
-const rng = lcg(0x5a3f9c2e);
-const STARS = Array.from({ length: 300 }, () => ({
-  x:      rng(),
-  y:      rng(),
-  r:      rng() * 1.4 + 0.2,
-  phase:  rng() * Math.PI * 2,
-  speed:  rng() * 1.8 + 0.3,
-  bright: rng() > 0.88,
-  green:  rng() > 0.78,
-}));
-
-// Static nebula blob definitions (x/y/r are 0–1 of canvas size)
-const NEBULAS = [
-  { x: 0.30, y: 0.45, r: 0.80, a: 0.20, g: [0,  90, 35] },
-  { x: 0.65, y: 0.75, r: 0.50, a: 0.15, g: [0, 115, 48] },
-  { x: 0.08, y: 0.65, r: 0.42, a: 0.11, g: [0,  70, 28] },
-  { x: 0.85, y: 0.20, r: 0.38, a: 0.09, g: [0,  85, 32] },
-  { x: 0.50, y: 0.85, r: 0.35, a: 0.08, g: [0,  60, 22] },
-];
 
 // ── Satellite SVG ─────────────────────────────────────────────
 function Satellite() {
@@ -198,9 +169,6 @@ function Satellite() {
 
 // ── Main component ────────────────────────────────────────────
 export default function HeroSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const frameRef  = useRef<number>(0);
-
   const goToSolutions = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     if (window.location.hash !== "#solutions") {
@@ -212,80 +180,19 @@ export default function HeroSection() {
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    function draw(ts: number) {
-      const dpr = window.devicePixelRatio || 1;
-      const W   = canvas!.clientWidth;
-      const H   = canvas!.clientHeight;
-      if (canvas!.width  !== Math.round(W * dpr) ||
-          canvas!.height !== Math.round(H * dpr)) {
-        canvas!.width  = Math.round(W * dpr);
-        canvas!.height = Math.round(H * dpr);
-      }
-      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // Black base
-      ctx!.fillStyle = "#000000";
-      ctx!.fillRect(0, 0, W, H);
-
-      // Nebula blobs
-      NEBULAS.forEach(({ x, y, r, a, g }) => {
-        const gx = x * W, gy = y * H, gr = r * Math.max(W, H);
-        const grad = ctx!.createRadialGradient(gx, gy, 0, gx, gy, gr);
-        grad.addColorStop(0,   `rgba(${g[0]},${g[1]},${g[2]},${a})`);
-        grad.addColorStop(0.45,`rgba(${g[0]},${Math.round(g[1]*0.55)},${Math.round(g[2]*0.55)},${a * 0.28})`);
-        grad.addColorStop(1,   "rgba(0,0,0,0)");
-        ctx!.fillStyle = grad;
-        ctx!.fillRect(0, 0, W, H);
-      });
-
-      // Stars
-      STARS.forEach(({ x, y, r, phase, speed, bright, green }) => {
-        const sx = x * W, sy = y * H;
-        const t  = 0.4 + 0.6 * Math.sin(ts * 0.001 * speed + phase);
-        const col = green
-          ? `rgba(100,255,160,${0.75 * t})`
-          : `rgba(255,255,255,${0.85 * t})`;
-
-        if (bright) {
-          // 4-pointed cross highlight
-          const arm = r * 5 * t;
-          ctx!.strokeStyle = green
-            ? `rgba(100,255,160,${0.5 * t})`
-            : `rgba(255,255,255,${0.4 * t})`;
-          ctx!.lineWidth = 0.5;
-          ctx!.beginPath();
-          ctx!.moveTo(sx - arm, sy); ctx!.lineTo(sx + arm, sy);
-          ctx!.moveTo(sx, sy - arm); ctx!.lineTo(sx, sy + arm);
-          ctx!.stroke();
-        }
-
-        ctx!.beginPath();
-        ctx!.arc(sx, sy, r * (bright ? t * 1.1 : t), 0, Math.PI * 2);
-        ctx!.fillStyle = col;
-        ctx!.fill();
-      });
-
-      frameRef.current = requestAnimationFrame(draw);
-    }
-
-    frameRef.current = requestAnimationFrame(draw);
-    return () => cancelAnimationFrame(frameRef.current);
-  }, []);
-
   return (
-    <section className="relative min-h-screen overflow-hidden text-white" style={{ background: "#000" }}>
-      {/* Animated starfield / nebula canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 h-full w-full"
-        style={{ zIndex: 0 }}
-      />
+    <section
+      className="relative min-h-screen overflow-hidden text-white"
+      style={{
+        backgroundImage: "url('/nebula-bg.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center top",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "#000",
+      }}
+    >
+      {/* Subtle dark overlay so text stays legible */}
+      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.35)", zIndex: 0 }} />
 
       {/* Content layer */}
       <div className="relative z-10 container mx-auto flex min-h-screen items-center px-6 py-24">
