@@ -28,14 +28,14 @@ export default function HeroSection() {
 
         {/* Headline */}
         <h1 className="max-w-4xl text-5xl md:text-6xl font-semibold leading-tight">
-          Intelligence Infrastructure{" "}
-          <span className="text-white/60">For A Climate Resilient Global South</span>
+          Real-time Climate and Agriculture{" "}
+          <span className="text-white/60">Risk Intelligence.</span>
         </h1>
 
         {/* Subtext */}
         <p className="mt-6 max-w-2xl text-lg text-white/70">
-          We build the data infrastructure that powers climate risk decisions, unlocks agricultural
-          finance, and gives nations sovereignty over their own data.
+          We turn raw data into the risk scores, trigger indices, and yield forecasts that
+          enterprises, insurers, and governments need to deploy capital with confidence.
         </p>
 
         {/* Module tags */}
