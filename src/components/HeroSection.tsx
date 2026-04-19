@@ -52,11 +52,15 @@ export default function HeroSection() {
 
         {/* Buttons */}
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
-          <Button asChild size="lg" className="gold-gradient hover:opacity-90">
-            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-              Book a Discovery Call →
-            </a>
-          </Button>
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-7 py-3.5 font-display text-sm font-semibold text-white transition-opacity hover:opacity-85"
+            style={{ background: "hsl(33,65%,50%)" }}
+          >
+            Book a Discovery Call →
+          </a>
           <Button
             asChild
             size="lg"
