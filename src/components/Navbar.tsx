@@ -5,7 +5,6 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "Platform", href: "#solutions" },
   { label: "How It Works", href: "#what-we-build" },
-  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -20,13 +19,22 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div className="hidden items-center gap-8 md:flex">
+          {navLinks.slice(0, 1).map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="font-mono text-[11px] uppercase tracking-[0.1em] text-hero-muted transition-colors hover:text-hero-foreground"
+            >
+              {link.label}
+            </a>
+          ))}
           <Link
             to="/products"
             className="font-mono text-[11px] uppercase tracking-[0.1em] text-hero-muted transition-colors hover:text-hero-foreground"
           >
             Products
           </Link>
-          {navLinks.map((link) => (
+          {navLinks.slice(1).map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -57,6 +65,16 @@ const Navbar = () => {
       {open && (
         <div className="border-t border-hero-foreground/10 bg-hero px-6 py-6 md:hidden">
           <div className="flex flex-col gap-4">
+            {navLinks.slice(0, 1).map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="font-mono text-[11px] uppercase tracking-[0.1em] text-hero-muted transition-colors hover:text-hero-foreground"
+              >
+                {link.label}
+              </a>
+            ))}
             <Link
               to="/products"
               onClick={() => setOpen(false)}
@@ -64,7 +82,7 @@ const Navbar = () => {
             >
               Products
             </Link>
-            {navLinks.map((link) => (
+            {navLinks.slice(1).map((link) => (
               <a
                 key={link.href}
                 href={link.href}
