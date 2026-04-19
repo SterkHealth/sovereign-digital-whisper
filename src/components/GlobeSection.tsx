@@ -15,6 +15,7 @@ function project(
     x: cx + R * Math.cos(φ) * Math.sin(λd),
     y: cy - R * (Math.cos(φ0) * Math.sin(φ) - Math.sin(φ0) * Math.cos(φ) * Math.cos(λd)),
     visible: cosC > 0.05,
+    cosC,
   };
 }
 
@@ -26,38 +27,39 @@ function arcPoints(a: [number, number], b: [number, number], steps = 80): [numbe
 }
 
 // ── All city nodes ─────────────────────────────────────────────────────────
-const CITIES: { ll: [number, number]; label: string }[] = [
+// dy = vertical label offset in px so closely-spaced cities don't stack
+const CITIES: { ll: [number, number]; label: string; dy?: number }[] = [
   // Africa
-  { ll: [-1.29,  36.82], label: "Kenya"         },
-  { ll: [ 6.37,  -2.38], label: "Ghana"         },
-  { ll: [-26.2,  28.04], label: "South Africa"  },
-  { ll: [ 9.14,  40.49], label: "Ethiopia"      },
-  { ll: [14.47, -14.45], label: "Senegal"       },
-  { ll: [ 0.34,  32.58], label: "Uganda"        },
-  { ll: [ 6.37,   3.39], label: "Nigeria"       },
+  { ll: [-1.29,  36.82], label: "Kenya",         dy:   5 },
+  { ll: [ 6.37,  -2.38], label: "Ghana",         dy:  -8 },  // Ghana above Nigeria
+  { ll: [-26.2,  28.04], label: "South Africa"           },
+  { ll: [ 9.14,  40.49], label: "Ethiopia",      dy:  -6 },
+  { ll: [14.47, -14.45], label: "Senegal"                },
+  { ll: [ 0.34,  32.58], label: "Uganda",        dy:  -9 },  // Uganda above Kenya
+  { ll: [ 6.37,   3.39], label: "Nigeria",       dy:   8 },  // Nigeria below Ghana
   // Latin America
-  { ll: [-15.8,  -47.9], label: "Brazil"        },
-  { ll: [  4.7,  -74.1], label: "Colombia"      },
-  { ll: [-34.6,  -58.4], label: "Argentina"     },
-  { ll: [ 19.4,  -99.1], label: "Mexico"        },
-  { ll: [-12.0,  -77.0], label: "Peru"          },
-  // Europe
-  { ll: [ 51.5,   -0.12], label: "London"       },
-  { ll: [ 48.85,   2.35], label: "Paris"        },
-  { ll: [ 52.52,  13.4 ], label: "Berlin"       },
-  { ll: [ 41.9,   12.5 ], label: "Rome"         },
+  { ll: [-15.8,  -47.9], label: "Brazil"                 },
+  { ll: [  4.7,  -74.1], label: "Colombia"               },
+  { ll: [-34.6,  -58.4], label: "Argentina"              },
+  { ll: [ 19.4,  -99.1], label: "Mexico"                 },
+  { ll: [-12.0,  -77.0], label: "Peru"                   },
+  // Europe — stagger all four so they never sit on the same line
+  { ll: [ 51.5,   -0.12], label: "London",       dy: -20 },  // top-left of cluster
+  { ll: [ 48.85,   2.35], label: "Paris",        dy:  -6 },  // mid-left
+  { ll: [ 52.52,  13.4 ], label: "Berlin",       dy: -20 },  // top-right of cluster
+  { ll: [ 41.9,   12.5 ], label: "Rome",         dy:   6 },  // bottom of cluster
   // North America
-  { ll: [ 40.71,  -74.01], label: "New York"    },
-  { ll: [ 37.8,  -122.4 ], label: "San Francisco"},
-  { ll: [ 45.42,  -75.69], label: "Ottawa"      },
+  { ll: [ 40.71,  -74.01], label: "New York",    dy:   7 },  // below Ottawa
+  { ll: [ 37.8,  -122.4 ], label: "San Francisco"        },
+  { ll: [ 45.42,  -75.69], label: "Ottawa",      dy:  -7 },  // above New York
   // Asia
-  { ll: [ 20.6,   78.9  ], label: "India"       },
-  { ll: [  1.35, 103.82  ], label: "Singapore"  },
-  { ll: [ 35.7,  139.7  ], label: "Tokyo"       },
-  { ll: [ 31.2,  121.5  ], label: "Shanghai"    },
-  { ll: [ -6.2,  106.8  ], label: "Jakarta"     },
+  { ll: [ 20.6,   78.9  ], label: "India"                },
+  { ll: [  1.35, 103.82  ], label: "Singapore"           },
+  { ll: [ 35.7,  139.7  ], label: "Tokyo",       dy:  -8 },  // above Shanghai
+  { ll: [ 31.2,  121.5  ], label: "Shanghai",    dy:   8 },  // below Tokyo
+  { ll: [ -6.2,  106.8  ], label: "Jakarta"              },
   // Australia
-  { ll: [-33.9,  151.2  ], label: "Sydney"      },
+  { ll: [-33.9,  151.2  ], label: "Sydney"               },
 ];
 
 // Arc pairs [from-index, to-index]
@@ -219,7 +221,7 @@ export default function GlobeSection() {
       });
 
       // ── City dots + labels ───────────────────────────────────────
-      CITIES.forEach(({ ll, label }) => {
+      CITIES.forEach(({ ll, label, dy = 0 }) => {
         const p = project(ll[0], ll[1], vcLat, vcLon, R, cx, cy);
         if (!p.visible) return;
 
@@ -234,13 +236,20 @@ export default function GlobeSection() {
         ctx!.beginPath(); ctx!.arc(p.x, p.y, 3, 0, Math.PI * 2);
         ctx!.fillStyle = "#4ade80"; ctx!.fill();
 
-        // Label — dynamically place left or right based on screen position
-        const onLeft = p.x < cx;
-        ctx!.font         = `600 11px 'Space Grotesk', sans-serif`;
-        ctx!.fillStyle    = "rgba(74,222,128,0.88)";
-        ctx!.textAlign    = onLeft ? "right" : "left";
-        ctx!.textBaseline = "middle";
-        ctx!.fillText(label, p.x + (onLeft ? -8 : 8), p.y);
+        // Label — fade the WHOLE label in/out based on cosC so no letters
+        // get partially clipped as the city approaches the globe rim.
+        // cosC < 0.15 → invisible; cosC > 0.28 → fully opaque.
+        const labelAlpha = Math.min(1, Math.max(0, (p.cosC - 0.15) / 0.13));
+        if (labelAlpha > 0) {
+          const onLeft = p.x < cx;
+          ctx!.globalAlpha  = labelAlpha;
+          ctx!.font         = `600 11px 'Space Grotesk', sans-serif`;
+          ctx!.fillStyle    = "rgba(74,222,128,0.88)";
+          ctx!.textAlign    = onLeft ? "right" : "left";
+          ctx!.textBaseline = "middle";
+          ctx!.fillText(label, p.x + (onLeft ? -8 : 8), p.y + dy);
+          ctx!.globalAlpha  = 1;
+        }
       });
 
       // ── Globe rim ───────────────────────────────────────────────
