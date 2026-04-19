@@ -26,53 +26,55 @@ function arcPoints(a: [number, number], b: [number, number], steps = 80): [numbe
   });
 }
 
-// ── City nodes — strict one-per-region, min ~20° spacing ──────────────────
+// ── 13 cities — one per world region, minimum ~25° apart on the sphere ─────
 const CITIES: { ll: [number, number]; label: string; dy?: number }[] = [
-  //  0  West Africa
-  { ll: [ 6.37,   3.39], label: "Nigeria"                 },
-  //  1  Europe
-  { ll: [51.5,   -0.12], label: "London",        dy: -10  },
-  //  2  Central Africa
-  { ll: [-4.3,   15.3 ], label: "Congo",         dy:   8  },
-  //  3  Southern Africa
-  { ll: [-26.2,  28.04], label: "South Africa"            },
-  //  4  East Africa
-  { ll: [-1.29,  36.82], label: "Kenya"                   },
-  //  5  Middle East
-  { ll: [25.2,   55.3 ], label: "Dubai",         dy:  -8  },
-  //  6  South Asia
-  { ll: [20.6,   78.9 ], label: "India"                   },
-  //  7  SE Asia
-  { ll: [ 1.35, 103.82], label: "Singapore"               },
-  //  8  East Asia
-  { ll: [31.2,  121.5 ], label: "Shanghai",      dy:  -9  },
-  //  9  East Asia
-  { ll: [35.7,  139.7 ], label: "Tokyo",         dy:   9  },
-  // 10  Oceania
-  { ll: [-33.9, 151.2 ], label: "Sydney"                  },
-  // 11  South Pacific
-  { ll: [-17.7, 178.4 ], label: "Fiji",          dy:   8  },
+  //  0  North America West  (lon -122°)
+  { ll: [ 37.8, -122.4], label: "San Francisco"           },
+  //  1  Central America     (lon -99°)
+  { ll: [ 19.4,  -99.1], label: "Mexico"                  },
+  //  2  South America       (lon -48°)
+  { ll: [-15.8,  -47.9], label: "Brazil"                  },
+  //  3  West Africa         (lon -14°)
+  { ll: [ 14.5,  -14.5], label: "Senegal"                 },
+  //  4  Europe              (lon 0°)
+  { ll: [ 51.5,   -0.1], label: "London",        dy: -10  },
+  //  5  Southern Africa     (lon 28°)
+  { ll: [-26.2,   28.0], label: "South Africa"            },
+  //  6  East Africa         (lon 37°)
+  { ll: [ -1.3,   36.8], label: "Kenya"                   },
+  //  7  Middle East         (lon 55°)
+  { ll: [ 25.2,   55.3], label: "Dubai",         dy:  -9  },
+  //  8  South Asia          (lon 79°)
+  { ll: [ 20.6,   78.9], label: "India"                   },
+  //  9  SE Asia             (lon 104°)
+  { ll: [  1.4,  103.8], label: "Singapore"               },
+  // 10  East Asia           (lon 140°)
+  { ll: [ 35.7,  139.7], label: "Tokyo"                   },
+  // 11  Oceania             (lon 151°)
+  { ll: [-33.9,  151.2], label: "Sydney",        dy:   9  },
+  // 12  North Pacific       (lon -158°)
+  { ll: [ 21.3, -157.8], label: "Hawaii"                  },
 ];
 
-// Arc pairs [from-index, to-index]
+// Arc pairs — global data flows
 const ARC_PAIRS: [number, number][] = [
-  [ 0,  1], // Nigeria → London
-  [ 2,  0], // Congo → Nigeria
-  [ 2,  4], // Congo → Kenya
-  [ 3,  1], // South Africa → London
-  [ 3,  5], // South Africa → Dubai
-  [ 4,  1], // Kenya → London
-  [ 4,  5], // Kenya → Dubai
-  [ 5,  6], // Dubai → India
-  [ 5,  1], // Dubai → London
-  [ 6,  7], // India → Singapore
-  [ 6,  1], // India → London
-  [ 7,  8], // Singapore → Shanghai
-  [ 7,  9], // Singapore → Tokyo
-  [ 8,  9], // Shanghai → Tokyo
-  [ 9, 10], // Tokyo → Sydney
-  [10, 11], // Sydney → Fiji
-  [10,  7], // Sydney → Singapore
+  [ 0,  4], // San Francisco → London
+  [ 1,  0], // Mexico → San Francisco
+  [ 2,  3], // Brazil → Senegal
+  [ 3,  4], // Senegal → London
+  [ 2,  4], // Brazil → London
+  [ 5,  7], // South Africa → Dubai
+  [ 6,  7], // Kenya → Dubai
+  [ 6,  4], // Kenya → London
+  [ 5,  4], // South Africa → London
+  [ 7,  8], // Dubai → India
+  [ 7,  4], // Dubai → London
+  [ 8,  9], // India → Singapore
+  [ 8,  4], // India → London
+  [ 9, 10], // Singapore → Tokyo
+  [10, 11], // Tokyo → Sydney
+  [11,  9], // Sydney → Singapore
+  [12,  0], // Hawaii → San Francisco
 ];
 
 const ARCS = ARC_PAIRS.map(([i, j], idx) => ({
@@ -84,11 +86,13 @@ const ARCS = ARC_PAIRS.map(([i, j], idx) => ({
 
 // Faint background country/region labels
 const BG_LABELS: { ll: [number, number]; label: string }[] = [
-  { ll: [ 0.0,  20.0], label: "AFRICA"       },
-  { ll: [48.0,  10.0], label: "EUROPE"        },
-  { ll: [35.0,  90.0], label: "ASIA"          },
-  { ll: [-28.0,135.0], label: "AUSTRALIA"     },
-  { ll: [ 0.0,  70.0], label: "INDIAN OCEAN"  },
+  { ll: [  0.0,  20.0], label: "AFRICA"        },
+  { ll: [ 48.0,  10.0], label: "EUROPE"         },
+  { ll: [ 35.0,  90.0], label: "ASIA"           },
+  { ll: [-28.0, 135.0], label: "AUSTRALIA"      },
+  { ll: [  0.0,  70.0], label: "INDIAN OCEAN"   },
+  { ll: [ 15.0, -90.0], label: "AMERICAS"       },
+  { ll: [  5.0, 170.0], label: "PACIFIC"        },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -117,9 +121,9 @@ export default function GlobeSection() {
       const cx = W / 2;
       const cy = H / 2;
 
-      // Oscillate across Africa → Middle East → SE Asia corridor
-      // Range: centre 70° ± 60° → swings between 10° (Europe/Africa) and 130° (SE Asia)
-      const vcLon = 70 + Math.sin(ts / 22000) * 60;
+      // Start centred on Africa (~25°) and rotate left (westward) slowly
+      // One full revolution every 70 s; subtract so it goes left
+      const vcLon = 25 - (ts / 70000) * 360;
       const vcLat = 15; // slight north tilt
 
       // ── Sphere ──────────────────────────────────────────────────
