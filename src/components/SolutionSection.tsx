@@ -1,4 +1,5 @@
 import { CloudRain, Sprout, Brain, Download, Cpu, Shield, Zap, BarChart3, Globe, Layers } from "lucide-react";
+import DashboardSection from "./DashboardSection";
 
 const modules = [
   {
@@ -149,6 +150,9 @@ const SolutionSection = () => {
             </div>
           ))}
         </div>
+
+        {/* Interactive Dashboard Preview */}
+        <DashboardSection />
 
         {/* Pipeline */}
         <div className="mt-20">
