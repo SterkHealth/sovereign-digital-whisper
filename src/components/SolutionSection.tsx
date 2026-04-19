@@ -225,24 +225,6 @@ const SolutionSection = () => {
           </div>
         </div>
 
-        {/* Market stats bar */}
-        <div
-          className="mt-16 grid gap-6 sm:grid-cols-3 border border-white/10 p-8"
-          style={{ background: "rgba(255,255,255,0.03)" }}
-        >
-          {[
-            { stat: "$1.5T", label: "TAM in climate risk analytics and agri data infrastructure across the Global South by 2030" },
-            { stat: "65%",   label: "of the world's uncultivated arable land sits in Africa — less than 3% of it is insured" },
-            { stat: "$90B",  label: "lost annually to climate-related agricultural disruption across Sub-Saharan Africa" },
-          ].map((item) => (
-            <div key={item.stat} className="text-center">
-              <p className="font-display text-4xl font-bold" style={{ color: "hsl(33,65%,50%)" }}>
-                {item.stat}
-              </p>
-              <p className="mt-2 font-body text-sm leading-relaxed text-white/55">{item.label}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
