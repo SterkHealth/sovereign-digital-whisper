@@ -206,16 +206,14 @@ export default function HeroSection() {
         </div>
 
         {/* Headline */}
-        <h1 className="mx-auto max-w-3xl text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight">
+        <h1 className="mx-auto max-w-5xl text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight">
           Real-time Climate and Agriculture{" "}
           <span className="text-white/55">Risk Intelligence.</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="mt-6 mx-auto max-w-xl text-lg text-white/65 leading-relaxed">
-          We turn raw data into the risk scores, trigger indices, and yield
-          forecasts that enterprises, insurers, and governments need to deploy
-          capital with confidence.
+        <p className="mt-6 mx-auto max-w-2xl text-lg text-white/65 leading-relaxed">
+          We turn raw data into the risk scores, trigger indices, and yield forecasts that enterprises, insurers, and governments need to deploy capital with confidence.
         </p>
 
         {/* Module tags */}
