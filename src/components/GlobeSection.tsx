@@ -54,12 +54,20 @@ const CITIES: { ll: [number, number]; label: string; dy?: number }[] = [
   { ll: [-33.9,  151.2], label: "Sydney",        dy:   9  },
   // 12  North Pacific       (lon -158°)
   { ll: [ 21.3, -157.8], label: "Hawaii"                  },
+  // 13  N. South America    (lon -74°) — fills Mexico→Brazil gap
+  { ll: [  4.7,  -74.1], label: "Colombia"                },
+  // 14  Southern cone       (lon -58°)
+  { ll: [-34.6,  -58.4], label: "Argentina"               },
 ];
 
 // Arc pairs — global data flows
 const ARC_PAIRS: [number, number][] = [
   [ 0,  4], // San Francisco → London
   [ 1,  0], // Mexico → San Francisco
+  [13,  1], // Colombia → Mexico
+  [13,  2], // Colombia → Brazil
+  [14,  2], // Argentina → Brazil
+  [14,  4], // Argentina → London
   [ 2,  3], // Brazil → Senegal
   [ 3,  4], // Senegal → London
   [ 2,  4], // Brazil → London
