@@ -280,42 +280,35 @@ export default function GlobeSection() {
           {/* Text */}
           <div>
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
-              The Data Problem
+              How It Works
             </p>
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Data flows out.{" "}
-              <span className="text-white/55">
-                Intelligence doesn't flow back.
-              </span>
+              Raw Data To{" "}
+              <span className="text-white/55">Decision-Ready Intelligence</span>
             </h2>
             <p className="mt-5 font-body text-base leading-relaxed text-white/60">
-              Agricultural and climate data from the Global South flows to
-              servers in the Global North — processed, packaged, and sold back
-              at prices the originating nations cannot afford or govern.
+              The intelligence infrastructure that digitises, unifies, and activates
+              agricultural and climate data at the source — so you can make decisions
+              in real time.
             </p>
-            <p className="mt-4 font-body text-sm leading-relaxed text-white/45">
-              Aixatech closes the loop. We keep data sovereign, process it
-              within national borders, and return decision-ready intelligence to
-              the governments, insurers, and institutions that need it most.
-            </p>
-            <div className="mt-8 flex flex-col gap-3">
+            <div className="mt-8 flex flex-col gap-4">
               {[
-                "Data processed within national borders",
-                "No foreign cloud dependency",
-                "Intelligence owned by the originating nation",
+                "Fragmented data unified into a single intelligence layer",
+                "Processed within national borders, owned by the originating nation",
+                "Decision-ready outputs built for the institutions that need them most",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-3">
+                <div key={item} className="flex items-start gap-3">
                   <div
-                    className="h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                    className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
                     style={{ background: "hsl(33,65%,50%)" }}
                   />
-                  <span className="font-body text-sm text-white/60">{item}</span>
+                  <span className="font-body text-sm leading-relaxed text-white/60">{item}</span>
                 </div>
               ))}
             </div>
 
             {/* Legend */}
-            <div className="mt-8 flex gap-6">
+            <div className="mt-10 flex gap-6">
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 rounded-full bg-[#4ade80]" />
                 <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Data origins</span>
