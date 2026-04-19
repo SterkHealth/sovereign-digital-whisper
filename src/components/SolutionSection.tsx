@@ -163,7 +163,7 @@ const SolutionSection = () => {
         <DashboardSection />
 
         {/* Pipeline */}
-        <div className="mt-20">
+        <div id="what-we-build" className="mt-20">
           <div className="max-w-2xl">
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
               How the platform works
