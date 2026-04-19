@@ -11,7 +11,7 @@ const ContactSection = () => {
         </p>
 
         <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-hero-foreground md:text-4xl">
-          Ready to build the infrastructure your nation controls?
+          Ready to turn data into decisions?
         </h2>
 
         <p className="mt-4 font-body text-base text-hero-muted">
