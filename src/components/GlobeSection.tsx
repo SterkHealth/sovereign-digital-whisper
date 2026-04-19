@@ -65,10 +65,15 @@ const CITIES: { ll: [number, number]; label: string; dy?: number }[] = [
   // Middle East / Central Asia (27–28) — fills 40°→78° gap
   { ll: [ 25.2,   55.3  ], label: "Dubai",       dy:  -7 },
   { ll: [ 19.1,   72.9  ], label: "Mumbai",      dy:   7 },
-  // Extra Americas / Caribbean (29) — fills 58°→99° gap
+  // Extra Americas / Caribbean (29)
   { ll: [ 10.5,  -66.9  ], label: "Venezuela",   dy:  -7 },
-  // Central/East Africa (30) — longitude bridge
+  // Central/East Africa (30)
   { ll: [-6.17,   35.74], label: "Tanzania",     dy:   8 },
+  // Extra nodes to fill edges of oscillation range
+  { ll: [-17.7,  178.4  ], label: "Fiji",        dy:   7 }, // 31 — right edge (130° view)
+  { ll: [ 33.9,   35.5  ], label: "Levant",      dy:  -7 }, // 32 — fills 13°→55° gap
+  { ll: [-4.3,    15.3  ], label: "Congo",        dy:   7 }, // 33 — Central Africa
+  { ll: [ 15.6,   32.5  ], label: "Sudan",        dy:  -7 }, // 34 — NE Africa bridge
 ];
 
 // Arc pairs [from-index, to-index]
@@ -112,6 +117,15 @@ const ARC_PAIRS: [number, number][] = [
   // Cross-Pacific
   [ 7, 17], // Brazil → San Francisco
   [ 8, 13], // Colombia → Paris
+  // Extra connections for new nodes
+  [32, 27], // Levant → Dubai
+  [32, 15], // Levant → Rome
+  [33,  1], // Congo → Ghana
+  [33,  0], // Congo → Kenya
+  [34,  3], // Sudan → Ethiopia
+  [34, 27], // Sudan → Dubai
+  [31, 24], // Fiji → Sydney
+  [31, 20], // Fiji → Singapore
 ];
 
 const ARCS = ARC_PAIRS.map(([i, j], idx) => ({
@@ -124,15 +138,11 @@ const ARCS = ARC_PAIRS.map(([i, j], idx) => ({
 // Faint background country/region labels
 const BG_LABELS: { ll: [number, number]; label: string }[] = [
   { ll: [ 0.0,  20.0 ], label: "AFRICA"        },
-  { ll: [ 0.0, -60.0 ], label: "SOUTH AMERICA" },
-  { ll: [40.0, -100.0], label: "NORTH AMERICA"  },
   { ll: [50.0,  15.0 ], label: "EUROPE"         },
   { ll: [35.0,  90.0 ], label: "ASIA"           },
   { ll: [-25.0, 135.0], label: "AUSTRALIA"      },
-  { ll: [ 0.0, -30.0 ], label: "ATLANTIC"       },
   { ll: [ 0.0,  70.0 ], label: "INDIAN OCEAN"   },
-  { ll: [ 5.0, -150.0], label: "PACIFIC"        },
-  { ll: [30.0,  55.0 ], label: "MIDDLE EAST"    },
+  { ll: [30.0,  50.0 ], label: "MIDDLE EAST"    },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -161,8 +171,9 @@ export default function GlobeSection() {
       const cx = W / 2;
       const cy = H / 2;
 
-      // Full continuous rotation — one revolution every 50 s
-      const vcLon = (ts / 50000) * 360;
+      // Oscillate across Africa → Middle East → SE Asia corridor (never faces empty Pacific)
+      // Range: centre 55° ± 75° → swings between -20° (Europe/Africa) and 130° (SE Asia)
+      const vcLon = 55 + Math.sin(ts / 22000) * 75;
       const vcLat = 15; // slight north tilt
 
       // ── Sphere ──────────────────────────────────────────────────
