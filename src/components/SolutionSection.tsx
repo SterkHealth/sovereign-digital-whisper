@@ -106,6 +106,10 @@ const differentiators = [
 ];
 
 const SolutionSection = () => {
+  const Icon0 = modules[0].icon;
+  const Icon1 = modules[1].icon;
+  const Icon2 = modules[2].icon;
+
   return (
     <section
       id="solutions"
@@ -159,7 +163,7 @@ const SolutionSection = () => {
                   className="inline-flex rounded-xl p-2.5"
                   style={{ background: "rgba(74,222,128,0.15)", border: "1px solid rgba(74,222,128,0.2)" }}
                 >
-                  <modules[0].icon size={18} className="text-white" />
+                  <Icon0 size={18} className="text-white" />
                 </div>
               </div>
               <h3 className="font-display text-2xl font-bold text-white">{modules[0].title}</h3>
@@ -193,7 +197,7 @@ const SolutionSection = () => {
                 Module 02
               </span>
               <div className="inline-flex rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.06)" }}>
-                <modules[1].icon size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
+                <Icon1 size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
               </div>
             </div>
             <h3 className="font-display text-xl font-bold text-white">{modules[1].title}</h3>
@@ -253,7 +257,7 @@ const SolutionSection = () => {
                 Module 03
               </span>
               <div className="inline-flex rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.06)" }}>
-                <modules[2].icon size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
+                <Icon2 size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
               </div>
             </div>
             <h3 className="font-display text-xl font-bold text-white">{modules[2].title}</h3>
