@@ -26,63 +26,46 @@ function arcPoints(a: [number, number], b: [number, number], steps = 80): [numbe
   });
 }
 
-// ── 13 cities — one per world region, minimum ~25° apart on the sphere ─────
 const CITIES: { ll: [number, number]; label: string; dy?: number }[] = [
-  //  0  North America West  (lon -122°)
-  { ll: [ 37.8, -122.4], label: "San Francisco"           },
-  //  1  Central America     (lon -99°)
-  { ll: [ 19.4,  -99.1], label: "Mexico"                  },
-  //  2  South America       (lon -48°)
-  { ll: [-15.8,  -47.9], label: "Brazil"                  },
-  //  3  West Africa         (lon -14°)
-  { ll: [ 14.5,  -14.5], label: "Senegal"                 },
-  //  4  Europe              (lon 0°)
-  { ll: [ 51.5,   -0.1], label: "London",        dy: -10  },
-  //  5  Southern Africa     (lon 28°)
-  { ll: [-26.2,   28.0], label: "South Africa"            },
-  //  6  East Africa         (lon 37°)
-  { ll: [ -1.3,   36.8], label: "Kenya"                   },
-  //  7  Middle East         (lon 55°)
-  { ll: [ 25.2,   55.3], label: "Dubai",         dy:  -9  },
-  //  8  South Asia          (lon 79°)
-  { ll: [ 20.6,   78.9], label: "India"                   },
-  //  9  SE Asia             (lon 104°)
-  { ll: [  1.4,  103.8], label: "Singapore"               },
-  // 10  East Asia           (lon 140°)
-  { ll: [ 35.7,  139.7], label: "Tokyo"                   },
-  // 11  Oceania             (lon 151°)
-  { ll: [-33.9,  151.2], label: "Sydney",        dy:   9  },
-  // 12  North Pacific       (lon -158°)
-  { ll: [ 21.3, -157.8], label: "Hawaii"                  },
-  // 13  N. South America    (lon -74°) — fills Mexico→Brazil gap
-  { ll: [  4.7,  -74.1], label: "Colombia"                },
-  // 14  Southern cone       (lon -58°)
-  { ll: [-34.6,  -58.4], label: "Argentina"               },
+  { ll: [ 37.8, -122.4], label: "San Francisco" },
+  { ll: [ 19.4,  -99.1], label: "Mexico"        },
+  { ll: [-15.8,  -47.9], label: "Brazil"         },
+  { ll: [ 14.5,  -14.5], label: "Senegal"        },
+  { ll: [ 51.5,   -0.1], label: "London",  dy: -10 },
+  { ll: [-26.2,   28.0], label: "South Africa"   },
+  { ll: [ -1.3,   36.8], label: "Kenya"          },
+  { ll: [ 25.2,   55.3], label: "Dubai",   dy:  -9 },
+  { ll: [ 20.6,   78.9], label: "India"          },
+  { ll: [  1.4,  103.8], label: "Singapore"      },
+  { ll: [ 35.7,  139.7], label: "Tokyo"          },
+  { ll: [-33.9,  151.2], label: "Sydney",  dy:   9 },
+  { ll: [ 21.3, -157.8], label: "Hawaii"         },
+  { ll: [  4.7,  -74.1], label: "Colombia"       },
+  { ll: [-34.6,  -58.4], label: "Argentina"      },
 ];
 
-// Arc pairs — global data flows
 const ARC_PAIRS: [number, number][] = [
-  [ 0,  4], // San Francisco → London
-  [ 1,  0], // Mexico → San Francisco
-  [13,  1], // Colombia → Mexico
-  [13,  2], // Colombia → Brazil
-  [14,  2], // Argentina → Brazil
-  [14,  4], // Argentina → London
-  [ 2,  3], // Brazil → Senegal
-  [ 3,  4], // Senegal → London
-  [ 2,  4], // Brazil → London
-  [ 5,  7], // South Africa → Dubai
-  [ 6,  7], // Kenya → Dubai
-  [ 6,  4], // Kenya → London
-  [ 5,  4], // South Africa → London
-  [ 7,  8], // Dubai → India
-  [ 7,  4], // Dubai → London
-  [ 8,  9], // India → Singapore
-  [ 8,  4], // India → London
-  [ 9, 10], // Singapore → Tokyo
-  [10, 11], // Tokyo → Sydney
-  [11,  9], // Sydney → Singapore
-  [12,  0], // Hawaii → San Francisco
+  [ 0,  4],
+  [ 1,  0],
+  [13,  1],
+  [13,  2],
+  [14,  2],
+  [14,  4],
+  [ 2,  3],
+  [ 3,  4],
+  [ 2,  4],
+  [ 5,  7],
+  [ 6,  7],
+  [ 6,  4],
+  [ 5,  4],
+  [ 7,  8],
+  [ 7,  4],
+  [ 8,  9],
+  [ 8,  4],
+  [ 9, 10],
+  [10, 11],
+  [11,  9],
+  [12,  0],
 ];
 
 const ARCS = ARC_PAIRS.map(([i, j], idx) => ({
@@ -92,18 +75,16 @@ const ARCS = ARC_PAIRS.map(([i, j], idx) => ({
   phase: idx / ARC_PAIRS.length,
 }));
 
-// Faint background country/region labels
 const BG_LABELS: { ll: [number, number]; label: string }[] = [
-  { ll: [  0.0,  20.0], label: "AFRICA"        },
-  { ll: [ 48.0,  10.0], label: "EUROPE"         },
-  { ll: [ 35.0,  90.0], label: "ASIA"           },
-  { ll: [-28.0, 135.0], label: "AUSTRALIA"      },
-  { ll: [  0.0,  70.0], label: "INDIAN OCEAN"   },
-  { ll: [ 15.0, -90.0], label: "AMERICAS"       },
-  { ll: [  5.0, 170.0], label: "PACIFIC"        },
+  { ll: [  0.0,  20.0], label: "AFRICA"       },
+  { ll: [ 48.0,  10.0], label: "EUROPE"        },
+  { ll: [ 35.0,  90.0], label: "ASIA"          },
+  { ll: [-28.0, 135.0], label: "AUSTRALIA"     },
+  { ll: [  0.0,  70.0], label: "INDIAN OCEAN"  },
+  { ll: [ 15.0, -90.0], label: "AMERICAS"      },
+  { ll: [  5.0, 170.0], label: "PACIFIC"       },
 ];
 
-// ── Component ─────────────────────────────────────────────────────────────────
 export default function GlobeSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const frameRef  = useRef<number>(0);
@@ -129,31 +110,29 @@ export default function GlobeSection() {
       const cx = W / 2;
       const cy = H / 2;
 
-      // Start centred on Africa (~25°) and rotate left (westward) slowly
-      // One full revolution every 70 s; subtract so it goes left
       const vcLon = 25 - (ts / 70000) * 360;
-      const vcLat = 15; // slight north tilt
+      const vcLat = 15;
 
-      // ── Sphere ──────────────────────────────────────────────────
+      // Sphere
       const grad = ctx!.createRadialGradient(cx - R * 0.25, cy - R * 0.2, R * 0.05, cx, cy, R);
-      grad.addColorStop(0,   "#1e4422");
-      grad.addColorStop(0.5, "#0b1d0d");
-      grad.addColorStop(1,   "#040d05");
+      grad.addColorStop(0,   "#0d2b12");
+      grad.addColorStop(0.5, "#061508");
+      grad.addColorStop(1,   "#020904");
       ctx!.beginPath(); ctx!.arc(cx, cy, R, 0, Math.PI * 2);
       ctx!.fillStyle = grad; ctx!.fill();
 
       // Atmosphere
       const atm = ctx!.createRadialGradient(cx, cy, R * 0.88, cx, cy, R * 1.22);
-      atm.addColorStop(0,   "rgba(30,100,40,0.28)");
-      atm.addColorStop(0.5, "rgba(15,60,22,0.10)");
+      atm.addColorStop(0,   "rgba(74,222,128,0.20)");
+      atm.addColorStop(0.5, "rgba(74,222,128,0.06)");
       atm.addColorStop(1,   "rgba(0,0,0,0)");
       ctx!.beginPath(); ctx!.arc(cx, cy, R * 1.22, 0, Math.PI * 2);
       ctx!.fillStyle = atm; ctx!.fill();
 
-      // ── Grid ────────────────────────────────────────────────────
+      // Grid
       ctx!.save();
       ctx!.beginPath(); ctx!.arc(cx, cy, R, 0, Math.PI * 2); ctx!.clip();
-      ctx!.strokeStyle = "rgba(60,150,70,0.15)"; ctx!.lineWidth = 0.5;
+      ctx!.strokeStyle = "rgba(74,222,128,0.10)"; ctx!.lineWidth = 0.5;
       for (let lat = -75; lat <= 75; lat += 15) {
         ctx!.beginPath(); let s = false;
         for (let lon = -180; lon <= 180; lon += 3) {
@@ -174,17 +153,17 @@ export default function GlobeSection() {
       }
       ctx!.restore();
 
-      // ── Background region labels ─────────────────────────────────
+      // Background region labels
       ctx!.textAlign = "center"; ctx!.textBaseline = "middle";
       BG_LABELS.forEach(({ ll, label }) => {
         const p = project(ll[0], ll[1], vcLat, vcLon, R, cx, cy);
         if (!p.visible) return;
         ctx!.font = `500 9px 'Space Grotesk', sans-serif`;
-        ctx!.fillStyle = "rgba(255,255,255,0.13)";
+        ctx!.fillStyle = "rgba(255,255,255,0.10)";
         ctx!.fillText(label, p.x, p.y);
       });
 
-      // ── Animated arcs ────────────────────────────────────────────
+      // Animated arcs
       const speed = ts * 0.00030;
       ARCS.forEach(({ pts, phase }) => {
         const head    = (speed + phase) % 1;
@@ -215,7 +194,7 @@ export default function GlobeSection() {
         }
       });
 
-      // ── City dots + labels ───────────────────────────────────────
+      // City dots + labels
       CITIES.forEach(({ ll, label, dy = 0 }) => {
         const p = project(ll[0], ll[1], vcLat, vcLon, R, cx, cy);
         if (!p.visible) return;
@@ -224,22 +203,19 @@ export default function GlobeSection() {
 
         // Pulse ring
         ctx!.beginPath(); ctx!.arc(p.x, p.y, 3.5 + pulse * 4, 0, Math.PI * 2);
-        ctx!.strokeStyle = `rgba(74,222,128,${0.3 * pulse})`;
+        ctx!.strokeStyle = `rgba(74,222,128,${0.35 * pulse})`;
         ctx!.lineWidth = 1; ctx!.stroke();
 
         // Core dot
         ctx!.beginPath(); ctx!.arc(p.x, p.y, 3, 0, Math.PI * 2);
         ctx!.fillStyle = "#4ade80"; ctx!.fill();
 
-        // Label — fade the WHOLE label in/out based on cosC so no letters
-        // get partially clipped as the city approaches the globe rim.
-        // cosC < 0.15 → invisible; cosC > 0.28 → fully opaque.
         const labelAlpha = Math.min(1, Math.max(0, (p.cosC - 0.15) / 0.13));
         if (labelAlpha > 0) {
           const onLeft = p.x < cx;
           ctx!.globalAlpha  = labelAlpha;
           ctx!.font         = `600 11px 'Space Grotesk', sans-serif`;
-          ctx!.fillStyle    = "rgba(74,222,128,0.88)";
+          ctx!.fillStyle    = "rgba(74,222,128,0.90)";
           ctx!.textAlign    = onLeft ? "right" : "left";
           ctx!.textBaseline = "middle";
           ctx!.fillText(label, p.x + (onLeft ? -8 : 8), p.y + dy);
@@ -247,9 +223,9 @@ export default function GlobeSection() {
         }
       });
 
-      // ── Globe rim ───────────────────────────────────────────────
+      // Globe rim
       ctx!.beginPath(); ctx!.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx!.strokeStyle = "rgba(50,120,60,0.3)"; ctx!.lineWidth = 1; ctx!.stroke();
+      ctx!.strokeStyle = "rgba(74,222,128,0.18)"; ctx!.lineWidth = 1; ctx!.stroke();
 
       frameRef.current = requestAnimationFrame(draw);
     }
@@ -261,19 +237,25 @@ export default function GlobeSection() {
   return (
     <section
       id="data-flow"
-      className="section-padding overflow-hidden"
-      style={{ background: "radial-gradient(ellipse at 70% 40%, rgba(22,163,74,0.45) 0%, rgba(16,120,50,0.22) 40%, #050d06 70%, #000000 100%)" }}
+      className="section-padding relative overflow-hidden"
+      style={{
+        background: "radial-gradient(ellipse at 75% 50%, rgba(74,222,128,0.48) 0%, rgba(74,222,128,0.14) 35%, #030303 65%)"
+      }}
     >
-      <div className="mx-auto max-w-7xl">
+
+      <div className="relative mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
 
           {/* Text */}
           <div>
-            <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#4ade80" }}>
+              Data Flow
+            </p>
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
               Raw Data To{" "}
-              <span className="text-white/55">Decision-Ready Intelligence</span>
+              <span style={{ color: "rgba(255,255,255,0.40)" }}>Decision-Ready Intelligence</span>
             </h2>
-            <p className="mt-5 font-body text-base leading-relaxed text-white/60">
+            <p className="mt-5 text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.50)" }}>
               The intelligence infrastructure that digitises, unifies, and activates
               agricultural and climate data at the source — so you can make decisions
               in real time.
@@ -287,21 +269,21 @@ export default function GlobeSection() {
                 <div key={item} className="flex items-start gap-3">
                   <div
                     className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
-                    style={{ background: "hsl(33,65%,50%)" }}
+                    style={{ background: "#4ade80" }}
                   />
-                  <span className="font-body text-sm leading-relaxed text-white/60">{item}</span>
+                  <span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.50)" }}>{item}</span>
                 </div>
               ))}
             </div>
 
             <div className="mt-10 flex gap-6">
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-[#4ade80]" />
-                <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Data nodes</span>
+                <div className="h-2 w-2 rounded-full" style={{ background: "#4ade80" }} />
+                <span className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)" }}>Data nodes</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="h-1 w-6 rounded" style={{ background: "rgba(210,130,48,0.7)" }} />
-                <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Data flows</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)" }}>Data flows</span>
               </div>
             </div>
           </div>

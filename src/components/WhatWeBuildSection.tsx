@@ -55,7 +55,7 @@ const WhatWeBuildSection = () => {
               <div className="relative">
                 <div
                   className="mb-4 flex h-12 w-12 items-center justify-center font-mono text-sm font-bold"
-                  style={{ background: "hsl(33,65%,50%)", color: "#fff" }}
+                  style={{ background: "#4ade80", color: "#fff" }}
                 >
                   <s.icon size={20} />
                 </div>

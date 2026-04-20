@@ -46,7 +46,7 @@ const DifferentiatorsSection = () => {
               </div>
               <p
                 className="font-mono text-sm font-bold uppercase tracking-[0.1em]"
-                style={{ color: "hsl(33,65%,50%)" }}
+                style={{ color: "#4ade80" }}
               >
                 {p.stat}
               </p>

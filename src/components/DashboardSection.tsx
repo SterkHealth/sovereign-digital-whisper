@@ -918,7 +918,7 @@ export default function DashboardSection() {
             onClick={() => setTab(key)}
             className={`flex items-center gap-2 px-5 py-3 font-mono text-[10px] uppercase tracking-[0.15em] transition-colors ${
               tab === key
-                ? "border-b-2 border-[#d28230] text-white"
+                ? "border-b-2 border-[#4ade80] text-white"
                 : "text-white/35 hover:text-white/60"
             }`}
           >

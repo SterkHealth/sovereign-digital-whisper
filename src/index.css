@@ -8,42 +8,33 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 4%;
-
     --card: 0 0% 100%;
     --card-foreground: 0 0% 4%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 4%;
-
     --primary: 0 0% 4%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 4%;
-
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
-
     --accent: 33 65% 50%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 0 0% 90%;
     --input: 0 0% 90%;
     --ring: 33 65% 50%;
-
     --radius: 0rem;
 
     /* Custom tokens */
-    --hero-bg: 160 18% 4%;
-    --hero-foreground: 0 0% 95%;
+    --hero-bg: 0 0% 2%;
+    --hero-foreground: 0 0% 97%;
     --hero-muted: 0 0% 55%;
     --gold: 33 65% 50%;
     --gold-muted: 33 40% 35%;
-    --navy: 160 18% 4%;
-    --navy-light: 160 12% 12%;
+    --navy: 0 0% 2%;
+    --navy-light: 0 0% 8%;
     --section-alt: 0 0% 97%;
 
     --sidebar-background: 0 0% 98%;
@@ -73,8 +64,8 @@
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 160 10% 14%;
-    --input: 160 10% 14%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
     --ring: 33 65% 50%;
   }
 }
@@ -84,8 +75,14 @@
     @apply border-border;
   }
 
+  html {
+    background: #030303;
+  }
+
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply antialiased;
+    background: #030303;
+    color: rgba(255,255,255,0.9);
     font-family: 'Space Grotesk', system-ui, sans-serif;
   }
 
@@ -100,22 +97,23 @@
     @apply px-6 py-24 md:px-12 lg:px-20 xl:px-32;
   }
 
-  .hero-gradient {
-    background: radial-gradient(ellipse at 50% 25%, rgba(22,163,74,0.55) 0%, rgba(16,120,50,0.30) 35%, #050d06 65%, #000000 100%);
+  /* Neon green glow blob — drop one of these anywhere as a sibling/child */
+  .glow-blob {
+    pointer-events: none;
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    will-change: opacity;
   }
 
   .gold-gradient {
-    background: hsl(33 65% 50%);
-    color: hsl(0 0% 100%);
+    background: #4ade80;
+    color: #030303;
+    font-weight: 700;
   }
 
   .text-balance {
     text-wrap: balance;
-  }
-
-  @keyframes satelliteFloat {
-    0%,  100% { transform: translateY(0px)   rotate(-2deg); }
-    50%        { transform: translateY(-22px) rotate(2deg);  }
   }
 
   .card-hover {
@@ -124,10 +122,33 @@
 
   .card-hover:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 40px -12px rgba(22,163,74,0.2), 0 4px 16px -4px rgba(0,0,0,0.5);
+    box-shadow: 0 12px 40px -8px rgba(74,222,128,0.18), 0 4px 20px -4px rgba(0,0,0,0.6);
   }
 
   .font-mono-accent {
     font-family: 'Space Mono', monospace;
+  }
+
+  /* Neon green text */
+  .text-neon {
+    color: #4ade80;
+  }
+
+  /* Glowing green border */
+  .border-neon {
+    border-color: rgba(74,222,128,0.4);
+    box-shadow: 0 0 20px rgba(74,222,128,0.15);
+  }
+
+  /* Green CTA button */
+  .btn-neon {
+    background: #4ade80;
+    color: #030303;
+    font-weight: 700;
+    transition: box-shadow 0.2s, opacity 0.2s;
+  }
+  .btn-neon:hover {
+    box-shadow: 0 0 32px rgba(74,222,128,0.5);
+    opacity: 0.92;
   }
 }

@@ -10,7 +10,7 @@ const CALENDLY_URL = "https://calendly.com/eshani-aixatech/30min";
 function DashboardMockup() {
   const bars = [30, 45, 62, 80, 70, 55, 42, 68, 85, 73, 58, 44];
   const metrics = [
-    { label: "Risk Index",  value: "74.2",   color: "hsl(33,65%,50%)" },
+    { label: "Risk Index",  value: "74.2",   color: "#4ade80" },
     { label: "Yield Score", value: "88 %",   color: "#4ade80" },
     { label: "Coverage",    value: "3.2 M ha", color: "#4ade80" },
     { label: "Active Alerts", value: "12",   color: "#f87171" },
@@ -64,7 +64,7 @@ function DashboardMockup() {
               className="flex-1 transition-all"
               style={{
                 height: `${h}%`,
-                background: i === 8 ? "hsl(33,65%,50%)" : "rgba(74,222,128,0.38)",
+                background: i === 8 ? "#4ade80" : "rgba(74,222,128,0.38)",
               }}
             />
           ))}
@@ -103,23 +103,23 @@ function JsonTerminal() {
         {"\n"}
         <span className="text-green-400">{"{"}</span>
         {"\n"}
-        {"  "}<span className="text-[hsl(33,65%,65%)]">"location"</span>
+        {"  "}<span className="text-[#4ade80]">"location"</span>
         {": "}<span className="text-green-300">"Mwanza, TZ"</span>{",\n"}
-        {"  "}<span className="text-[hsl(33,65%,65%)]">"date"</span>
+        {"  "}<span className="text-[#4ade80]">"date"</span>
         {": "}<span className="text-green-300">"2025-03-14"</span>{",\n"}
-        {"  "}<span className="text-[hsl(33,65%,65%)]">"risk_index"</span>
+        {"  "}<span className="text-[#4ade80]">"risk_index"</span>
         {": "}<span className="text-white/80">74.2</span>{",\n"}
-        {"  "}<span className="text-[hsl(33,65%,65%)]">"drought_prob"</span>
+        {"  "}<span className="text-[#4ade80]">"drought_prob"</span>
         {": "}<span className="text-white/80">0.61</span>{",\n"}
-        {"  "}<span className="text-[hsl(33,65%,65%)]">"yield_forecast_t_ha"</span>
+        {"  "}<span className="text-[#4ade80]">"yield_forecast_t_ha"</span>
         {": "}<span className="text-white/80">2.34</span>{",\n"}
-        {"  "}<span className="text-[hsl(33,65%,65%)]">"ndvi"</span>
+        {"  "}<span className="text-[#4ade80]">"ndvi"</span>
         {": "}<span className="text-white/80">0.48</span>{",\n"}
-        {"  "}<span className="text-[hsl(33,65%,65%)]">"trigger_breached"</span>
+        {"  "}<span className="text-[#4ade80]">"trigger_breached"</span>
         {": "}<span className="text-red-400">true</span>{",\n"}
-        {"  "}<span className="text-[hsl(33,65%,65%)]">"confidence"</span>
+        {"  "}<span className="text-[#4ade80]">"confidence"</span>
         {": "}<span className="text-white/80">0.92</span>{",\n"}
-        {"  "}<span className="text-[hsl(33,65%,65%)]">"sovereign_hosted"</span>
+        {"  "}<span className="text-[#4ade80]">"sovereign_hosted"</span>
         {": "}<span className="text-green-400">true</span>{"\n"}
         <span className="text-green-400">{"}"}</span>
       </pre>
@@ -132,8 +132,8 @@ function SovereignDiagram() {
     { x: 120, y: 28,  label: "Satellite",    sub: "Raw EO",         col: "#4ade80" },
     { x: 30,  y: 100, label: "Weather API",  sub: "WMO feeds",      col: "#4ade80" },
     { x: 210, y: 100, label: "IoT Sensors",  sub: "Ground truth",   col: "#4ade80" },
-    { x: 120, y: 165, label: "Ingest Layer", sub: "In-country",     col: "hsl(33,65%,50%)" },
-    { x: 120, y: 242, label: "Sovereign AI", sub: "Local model",    col: "hsl(33,65%,50%)" },
+    { x: 120, y: 165, label: "Ingest Layer", sub: "In-country",     col: "#4ade80" },
+    { x: 120, y: 242, label: "Sovereign AI", sub: "Local model",    col: "#4ade80" },
     { x: 30,  y: 315, label: "Gov Portal",   sub: "Ministry",       col: "#60a5fa" },
     { x: 120, y: 315, label: "Risk API",     sub: "Insurers",       col: "#60a5fa" },
     { x: 210, y: 315, label: "Dashboards",   sub: "DFIs",           col: "#60a5fa" },
@@ -334,7 +334,7 @@ export default function ProductsPage() {
                 <div className="mb-5 flex items-center gap-3">
                   <span
                     className="inline-flex h-8 w-8 items-center justify-center font-mono text-xs font-bold text-white"
-                    style={{ background: "hsl(33,65%,50%)" }}
+                    style={{ background: "#4ade80" }}
                   >
                     {p.number}
                   </span>
@@ -356,8 +356,8 @@ export default function ProductsPage() {
                   <span
                     className="inline-block border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.15em]"
                     style={{
-                      borderColor: "hsl(33 65% 50% / 0.35)",
-                      color: "hsl(33 65% 65%)",
+                      borderColor: "rgba(74,222,128,0.35)",
+                      color: "rgba(74,222,128,0.7)",
                     }}
                   >
                     {p.audience}
@@ -371,7 +371,7 @@ export default function ProductsPage() {
                       <CheckCircle2
                         size={15}
                         className="mt-0.5 flex-shrink-0"
-                        style={{ color: "hsl(33,65%,55%)" }}
+                        style={{ color: "#4ade80" }}
                       />
                       <span className="text-sm leading-relaxed text-white/65">{c}</span>
                     </li>
@@ -385,7 +385,7 @@ export default function ProductsPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-85"
-                    style={{ background: "hsl(33,65%,50%)" }}
+                    style={{ background: "#4ade80" }}
                   >
                     Book a Call →
                   </a>
@@ -425,7 +425,7 @@ export default function ProductsPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-85"
-              style={{ background: "hsl(33,65%,50%)" }}
+              style={{ background: "#4ade80" }}
             >
               Book a Discovery Call →
             </a>

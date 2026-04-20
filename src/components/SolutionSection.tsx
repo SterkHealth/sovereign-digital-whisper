@@ -109,19 +109,22 @@ const SolutionSection = () => {
   return (
     <section
       id="solutions"
-      className="section-padding"
-      style={{ background: "radial-gradient(ellipse at 20% 15%, rgba(22,163,74,0.50) 0%, rgba(16,120,50,0.22) 40%, #050d06 70%, #000000 100%)" }}
+      className="section-padding relative overflow-hidden"
+      style={{
+        background: "radial-gradient(ellipse at 15% 0%, rgba(74,222,128,0.50) 0%, rgba(74,222,128,0.15) 30%, #030303 60%)"
+      }}
     >
-      <div className="mx-auto max-w-7xl">
+
+      <div className="relative mx-auto max-w-7xl">
         {/* Header */}
         <div className="max-w-2xl">
-          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#4ade80" }}>
             The Platform
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
             1 Platform. 3 Modules.
           </h2>
-          <p className="mt-4 font-body text-base text-white/55">
+          <p className="mt-4 text-base" style={{ color: "rgba(255,255,255,0.50)" }}>
             A single platform that powers climate risk decisions, unlocks agricultural finance, and gives
             nations sovereignty over their own data.
           </p>
@@ -130,30 +133,42 @@ const SolutionSection = () => {
         {/* Bento module grid */}
         <div className="mt-14 grid gap-4 lg:grid-cols-3">
 
-          {/* Card 01 — featured green fill, spans 2 cols */}
+          {/* Card 01 — featured neon green fill, spans 2 cols */}
           <div
             className="card-hover relative overflow-hidden rounded-2xl p-8 lg:col-span-2"
-            style={{ background: "linear-gradient(135deg, #0a2e14 0%, #14532d 50%, #166534 100%)" }}
+            style={{
+              background: "linear-gradient(135deg, #14532d 0%, #166534 40%, #15803d 100%)",
+              border: "1px solid rgba(74,222,128,0.45)",
+              boxShadow: "0 0 50px rgba(74,222,128,0.25), inset 0 1px 0 rgba(74,222,128,0.25)",
+            }}
           >
-            {/* subtle inner glow */}
-            <div className="pointer-events-none absolute inset-0 rounded-2xl"
-              style={{ background: "radial-gradient(ellipse at 20% 20%, rgba(74,222,128,0.18) 0%, transparent 60%)" }} />
+            {/* Inner glow */}
+            <div
+              className="pointer-events-none absolute inset-0 rounded-2xl"
+              style={{ background: "radial-gradient(ellipse at 15% 20%, rgba(74,222,128,0.40) 0%, transparent 55%)" }}
+            />
             <div className="relative">
               <div className="mb-5 flex items-center justify-between">
-                <span className="rounded-full border border-white/20 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-white/70">
+                <span
+                  className="rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-widest"
+                  style={{ border: "1px solid rgba(74,222,128,0.35)", color: "rgba(74,222,128,0.85)" }}
+                >
                   Module 01
                 </span>
-                <div className="inline-flex rounded-lg p-2.5" style={{ background: "rgba(255,255,255,0.12)" }}>
+                <div
+                  className="inline-flex rounded-xl p-2.5"
+                  style={{ background: "rgba(74,222,128,0.15)", border: "1px solid rgba(74,222,128,0.2)" }}
+                >
                   <modules[0].icon size={18} className="text-white" />
                 </div>
               </div>
               <h3 className="font-display text-2xl font-bold text-white">{modules[0].title}</h3>
-              <p className="mt-3 font-body text-sm leading-relaxed text-white/70">{modules[0].description}</p>
+              <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>{modules[0].description}</p>
               <ul className="mt-6 grid grid-cols-2 gap-2">
                 {modules[0].capabilities.map((c) => (
-                  <li key={c} className="flex items-start gap-2 text-sm text-white/65">
-                    <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-green-400/80" />
-                    <span className="font-body leading-relaxed">{c}</span>
+                  <li key={c} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>
+                    <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "#4ade80" }} />
+                    <span className="leading-relaxed">{c}</span>
                   </li>
                 ))}
               </ul>
@@ -162,70 +177,92 @@ const SolutionSection = () => {
 
           {/* Card 02 — dark */}
           <div
-            className="card-hover flex flex-col rounded-2xl border border-white/[0.10] p-8 transition-colors hover:border-green-500/30"
-            style={{ background: "rgba(255,255,255,0.04)" }}
+            className="card-hover flex flex-col rounded-2xl p-8 transition-all"
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.07)",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(74,222,128,0.25)")}
+            onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
           >
             <div className="mb-5 flex items-center justify-between">
-              <span className="rounded-full border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-white/50">
+              <span
+                className="rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-widest"
+                style={{ border: "1px solid rgba(255,255,255,0.10)", color: "rgba(255,255,255,0.40)" }}
+              >
                 Module 02
               </span>
-              <div className="inline-flex rounded-lg p-2.5" style={{ background: "rgba(255,255,255,0.07)" }}>
-                <modules[1].icon size={18} className="text-white/70" />
+              <div className="inline-flex rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.06)" }}>
+                <modules[1].icon size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
               </div>
             </div>
             <h3 className="font-display text-xl font-bold text-white">{modules[1].title}</h3>
-            <p className="mt-3 font-body text-sm leading-relaxed text-white/55 flex-1">{modules[1].description}</p>
+            <p className="mt-3 text-sm leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.45)" }}>{modules[1].description}</p>
             <ul className="mt-5 space-y-2">
               {modules[1].capabilities.map((c) => (
-                <li key={c} className="flex items-start gap-2 text-sm text-white/50">
-                  <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "hsl(33,65%,50%)" }} />
-                  <span className="font-body leading-relaxed">{c}</span>
+                <li key={c} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
+                  <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "#4ade80" }} />
+                  <span className="leading-relaxed">{c}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Stats row — 3 bento tiles */}
-          <div className="rounded-2xl border border-white/[0.10] p-6 flex flex-col justify-between"
-            style={{ background: "rgba(255,255,255,0.04)" }}>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-white/40">Countries covered</p>
-            <div>
-              <p className="font-display text-5xl font-bold text-white">40+</p>
-              <p className="mt-1 text-sm text-white/45">Across Africa, SE Asia &amp; MENA</p>
-            </div>
-          </div>
-
+          {/* Stats bento — Countries */}
           <div
             className="rounded-2xl p-6 flex flex-col justify-between"
-            style={{ background: "linear-gradient(135deg, #1a4d2e 0%, #166534 100%)" }}
+            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
           >
-            <p className="font-mono text-[10px] uppercase tracking-widest text-green-300/60">Hectares monitored</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "rgba(74,222,128,0.5)" }}>Countries covered</p>
             <div>
-              <p className="font-display text-5xl font-bold text-white">3.2M</p>
-              <p className="mt-1 text-sm text-green-200/50">Plot-level resolution</p>
+              <p className="font-display text-5xl font-bold text-white">40+</p>
+              <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.35)" }}>Across Africa, SE Asia &amp; MENA</p>
             </div>
           </div>
 
-          {/* Card 03 — Sovereign AI, spans 1 col */}
+          {/* Stats bento — Hectares — green fill */}
           <div
-            className="card-hover flex flex-col rounded-2xl border border-white/[0.10] p-8 transition-colors hover:border-green-500/30"
-            style={{ background: "rgba(255,255,255,0.04)" }}
+            className="rounded-2xl p-6 flex flex-col justify-between"
+            style={{
+              background: "linear-gradient(135deg, #052e16 0%, #166534 100%)",
+              border: "1px solid rgba(74,222,128,0.2)",
+            }}
+          >
+            <p className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "rgba(74,222,128,0.65)" }}>Hectares monitored</p>
+            <div>
+              <p className="font-display text-5xl font-bold text-white">3.2M</p>
+              <p className="mt-1 text-sm" style={{ color: "rgba(74,222,128,0.45)" }}>Plot-level resolution</p>
+            </div>
+          </div>
+
+          {/* Card 03 — Sovereign AI */}
+          <div
+            className="card-hover flex flex-col rounded-2xl p-8 transition-all"
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.07)",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(74,222,128,0.25)")}
+            onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
           >
             <div className="mb-5 flex items-center justify-between">
-              <span className="rounded-full border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-white/50">
+              <span
+                className="rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-widest"
+                style={{ border: "1px solid rgba(255,255,255,0.10)", color: "rgba(255,255,255,0.40)" }}
+              >
                 Module 03
               </span>
-              <div className="inline-flex rounded-lg p-2.5" style={{ background: "rgba(255,255,255,0.07)" }}>
-                <modules[2].icon size={18} className="text-white/70" />
+              <div className="inline-flex rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.06)" }}>
+                <modules[2].icon size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
               </div>
             </div>
             <h3 className="font-display text-xl font-bold text-white">{modules[2].title}</h3>
-            <p className="mt-3 font-body text-sm leading-relaxed text-white/55 flex-1">{modules[2].description}</p>
+            <p className="mt-3 text-sm leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.45)" }}>{modules[2].description}</p>
             <ul className="mt-5 space-y-2">
               {modules[2].capabilities.map((c) => (
-                <li key={c} className="flex items-start gap-2 text-sm text-white/50">
-                  <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "hsl(33,65%,50%)" }} />
-                  <span className="font-body leading-relaxed">{c}</span>
+                <li key={c} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
+                  <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "#4ade80" }} />
+                  <span className="leading-relaxed">{c}</span>
                 </li>
               ))}
             </ul>
@@ -239,13 +276,13 @@ const SolutionSection = () => {
         {/* Pipeline */}
         <div id="what-we-build" className="mt-20">
           <div className="max-w-2xl">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#4ade80" }}>
               How the platform works
             </p>
             <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-white">
               From raw data to decision-ready intelligence.
             </h3>
-            <p className="mt-3 font-body text-sm text-white/55">
+            <p className="mt-3 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
               End-to-end sovereign infrastructure — ingesting raw earth observation and climate data and
               delivering actionable intelligence entirely within national borders.
             </p>
@@ -255,20 +292,22 @@ const SolutionSection = () => {
             {pipeline.map((p) => (
               <div
                 key={p.title}
-                className="rounded-2xl border border-white/[0.10] p-7 transition-colors hover:border-green-500/25"
-                style={{ background: "rgba(255,255,255,0.04)" }}
+                className="rounded-2xl p-7 transition-all"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(74,222,128,0.20)")}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
               >
                 <div className="mb-4 flex items-center gap-3">
                   <div
-                    className="flex h-9 w-9 items-center justify-center font-mono text-xs font-bold text-white"
-                    style={{ background: "hsl(33,65%,50%)" }}
+                    className="flex h-9 w-9 items-center justify-center font-mono text-xs font-bold text-white rounded-lg"
+                    style={{ background: "#4ade80" }}
                   >
                     {p.step}
                   </div>
-                  <p.icon size={18} className="text-white/40" />
+                  <p.icon size={18} style={{ color: "rgba(255,255,255,0.30)" }} />
                 </div>
                 <h4 className="font-display text-base font-bold text-white">{p.title}</h4>
-                <p className="mt-2 font-body text-sm leading-relaxed text-white/55">{p.description}</p>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>{p.description}</p>
               </div>
             ))}
           </div>
@@ -276,7 +315,7 @@ const SolutionSection = () => {
 
         {/* Why Aixatech */}
         <div className="mt-20">
-          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#4ade80" }}>
             Why Aixatech
           </p>
           <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-white">
@@ -286,14 +325,19 @@ const SolutionSection = () => {
             {differentiators.map((d) => (
               <div
                 key={d.title}
-                className="rounded-2xl border border-white/[0.10] p-6 transition-colors hover:border-green-500/25"
-                style={{ background: "rgba(255,255,255,0.04)" }}
+                className="rounded-2xl p-6 transition-all"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(74,222,128,0.20)")}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
               >
-                <div className="mb-4 inline-flex rounded-xl border border-white/[0.10] p-2.5" style={{ background: "rgba(255,255,255,0.06)" }}>
-                  <d.icon size={18} className="text-white/70" />
+                <div
+                  className="mb-4 inline-flex rounded-xl p-2.5"
+                  style={{ background: "rgba(74,222,128,0.08)", border: "1px solid rgba(74,222,128,0.12)" }}
+                >
+                  <d.icon size={18} style={{ color: "#4ade80" }} />
                 </div>
                 <h4 className="font-display text-sm font-bold text-white">{d.title}</h4>
-                <p className="mt-2 font-body text-sm leading-relaxed text-white/55">{d.description}</p>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>{d.description}</p>
               </div>
             ))}
           </div>

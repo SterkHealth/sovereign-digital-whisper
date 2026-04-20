@@ -47,7 +47,7 @@ const TeamSection = () => {
             <div key={member.name} className="border border-border bg-card p-6">
               <div
                 className="mb-4 flex h-14 w-14 items-center justify-center font-mono text-base font-bold text-white"
-                style={{ background: "hsl(33,65%,50%)" }}
+                style={{ background: "#4ade80" }}
               >
                 {member.name.split(" ").map((n) => n[0]).join("")}
               </div>

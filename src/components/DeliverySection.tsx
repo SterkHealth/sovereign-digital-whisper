@@ -40,7 +40,7 @@ const DeliverySection = () => {
             <div key={s.title} className="card-hover border border-border bg-card p-8">
               <div
                 className="mb-5 flex h-12 w-12 items-center justify-center font-mono text-sm font-bold text-white"
-                style={{ background: "hsl(33,65%,50%)" }}
+                style={{ background: "#4ade80" }}
               >
                 {s.code}
               </div>
@@ -50,7 +50,7 @@ const DeliverySection = () => {
               </p>
               <p
                 className="mt-5 font-mono text-[10px] uppercase tracking-[0.15em]"
-                style={{ color: "hsl(33,65%,50%)" }}
+                style={{ color: "#4ade80" }}
               >
                 {s.badge}
               </p>
