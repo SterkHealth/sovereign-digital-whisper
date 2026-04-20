@@ -101,7 +101,7 @@
   }
 
   .hero-gradient {
-    background: radial-gradient(ellipse at 50% 0%, rgba(22,163,74,0.22) 0%, rgba(20,83,45,0.14) 30%, #030503 60%, #000000 100%);
+    background: radial-gradient(ellipse at 50% 25%, rgba(22,163,74,0.55) 0%, rgba(16,120,50,0.30) 35%, #050d06 65%, #000000 100%);
   }
 
   .gold-gradient {

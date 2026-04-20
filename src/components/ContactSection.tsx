@@ -4,7 +4,7 @@ const CALENDLY_URL = "https://calendly.com/eshani-aixatech/30min";
 
 const ContactSection = () => {
   return (
-    <section id="contact" className="section-padding" style={{ background: "radial-gradient(ellipse at 50% -10%, rgba(20,83,45,0.28) 0%, #030503 50%, #000000 100%)" }}>
+    <section id="contact" className="section-padding" style={{ background: "radial-gradient(ellipse at 50% 40%, rgba(22,163,74,0.50) 0%, rgba(16,120,50,0.25) 40%, #050d06 70%, #000000 100%)" }}>
       <div className="mx-auto max-w-3xl text-center">
         <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-hero-muted">
           Start the Conversation

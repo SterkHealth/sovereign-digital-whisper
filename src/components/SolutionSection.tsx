@@ -110,7 +110,7 @@ const SolutionSection = () => {
     <section
       id="solutions"
       className="section-padding"
-      style={{ background: "radial-gradient(ellipse at 30% 10%, rgba(22,163,74,0.22) 0%, rgba(20,83,45,0.12) 35%, #030503 65%, #000000 100%)" }}
+      style={{ background: "radial-gradient(ellipse at 20% 15%, rgba(22,163,74,0.50) 0%, rgba(16,120,50,0.22) 40%, #050d06 70%, #000000 100%)" }}
     >
       <div className="mx-auto max-w-7xl">
         {/* Header */}

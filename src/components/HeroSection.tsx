@@ -144,7 +144,7 @@ export default function HeroSection() {
   return (
     <section
       className="relative min-h-screen overflow-hidden text-white flex items-center justify-center"
-      style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(22,163,74,0.22) 0%, rgba(20,83,45,0.14) 30%, #030503 60%, #000000 100%)" }}
+      style={{ background: "radial-gradient(ellipse at 50% 25%, rgba(22,163,74,0.55) 0%, rgba(16,120,50,0.30) 35%, #050d06 65%, #000000 100%)" }}
     >
 
       {/* Centred content */}
