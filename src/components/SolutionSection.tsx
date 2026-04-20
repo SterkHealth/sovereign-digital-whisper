@@ -110,7 +110,7 @@ const SolutionSection = () => {
     <section
       id="solutions"
       className="section-padding"
-      style={{ background: "radial-gradient(ellipse at 25% 60%, #0d2010 0%, #051008 40%, #000000 75%)" }}
+      style={{ background: "radial-gradient(ellipse at 50% -10%, rgba(20,83,45,0.28) 0%, #030503 50%, #000000 100%)" }}
     >
       <div className="mx-auto max-w-7xl">
         {/* Header */}
@@ -127,13 +127,13 @@ const SolutionSection = () => {
           </p>
         </div>
 
-        {/* 3 Modules */}
+        {/* 3 Modules — bento layout: first card spans 2 cols */}
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {modules.map((m) => (
+          {modules.map((m, idx) => (
             <div
               key={m.title}
-              className="card-hover flex flex-col border border-white/10 p-8"
-              style={{ background: "rgba(255,255,255,0.03)" }}
+              className={`card-hover flex flex-col border border-white/[0.12] p-8 transition-colors hover:border-white/20${idx === 0 ? " lg:col-span-2" : ""}`}
+              style={{ background: "rgba(255,255,255,0.04)" }}
             >
               <div className="mb-5 flex items-center justify-between">
                 <div className="inline-flex p-3" style={{ background: "hsl(33,65%,50%)" }}>
@@ -181,8 +181,8 @@ const SolutionSection = () => {
             {pipeline.map((p) => (
               <div
                 key={p.title}
-                className="border border-white/10 p-7"
-                style={{ background: "rgba(255,255,255,0.03)" }}
+                className="border border-white/[0.12] p-7 transition-colors hover:border-white/20"
+                style={{ background: "rgba(255,255,255,0.04)" }}
               >
                 <div className="mb-4 flex items-center gap-3">
                   <div
@@ -212,10 +212,10 @@ const SolutionSection = () => {
             {differentiators.map((d) => (
               <div
                 key={d.title}
-                className="border border-white/10 p-6"
-                style={{ background: "rgba(255,255,255,0.03)" }}
+                className="border border-white/[0.12] p-6 transition-colors hover:border-white/20"
+                style={{ background: "rgba(255,255,255,0.04)" }}
               >
-                <div className="mb-4 inline-flex border border-white/10 p-2.5" style={{ background: "rgba(255,255,255,0.05)" }}>
+                <div className="mb-4 inline-flex border border-white/[0.12] p-2.5" style={{ background: "rgba(255,255,255,0.05)" }}>
                   <d.icon size={18} className="text-white/70" />
                 </div>
                 <h4 className="font-display text-sm font-bold text-white">{d.title}</h4>

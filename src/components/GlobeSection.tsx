@@ -262,7 +262,7 @@ export default function GlobeSection() {
     <section
       id="data-flow"
       className="section-padding overflow-hidden"
-      style={{ background: "radial-gradient(ellipse at 25% 60%, #0d2010 0%, #051008 40%, #000000 75%)" }}
+      style={{ background: "radial-gradient(ellipse at 50% -10%, rgba(20,83,45,0.28) 0%, #030503 50%, #000000 100%)" }}
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
