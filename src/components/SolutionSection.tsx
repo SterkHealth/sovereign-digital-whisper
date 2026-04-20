@@ -110,7 +110,7 @@ const SolutionSection = () => {
     <section
       id="solutions"
       className="section-padding"
-      style={{ background: "radial-gradient(ellipse at 50% -10%, rgba(20,83,45,0.28) 0%, #030503 50%, #000000 100%)" }}
+      style={{ background: "radial-gradient(ellipse at 30% 10%, rgba(22,163,74,0.22) 0%, rgba(20,83,45,0.12) 35%, #030503 65%, #000000 100%)" }}
     >
       <div className="mx-auto max-w-7xl">
         {/* Header */}
@@ -127,36 +127,110 @@ const SolutionSection = () => {
           </p>
         </div>
 
-        {/* 3 Modules — bento layout: first card spans 2 cols */}
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {modules.map((m, idx) => (
-            <div
-              key={m.title}
-              className={`card-hover flex flex-col border border-white/[0.12] p-8 transition-colors hover:border-white/20${idx === 0 ? " lg:col-span-2" : ""}`}
-              style={{ background: "rgba(255,255,255,0.04)" }}
-            >
+        {/* Bento module grid */}
+        <div className="mt-14 grid gap-4 lg:grid-cols-3">
+
+          {/* Card 01 — featured green fill, spans 2 cols */}
+          <div
+            className="card-hover relative overflow-hidden rounded-2xl p-8 lg:col-span-2"
+            style={{ background: "linear-gradient(135deg, #0a2e14 0%, #14532d 50%, #166534 100%)" }}
+          >
+            {/* subtle inner glow */}
+            <div className="pointer-events-none absolute inset-0 rounded-2xl"
+              style={{ background: "radial-gradient(ellipse at 20% 20%, rgba(74,222,128,0.18) 0%, transparent 60%)" }} />
+            <div className="relative">
               <div className="mb-5 flex items-center justify-between">
-                <div className="inline-flex p-3" style={{ background: "hsl(33,65%,50%)" }}>
-                  <m.icon size={20} className="text-white" />
-                </div>
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
-                  Module {m.number}
+                <span className="rounded-full border border-white/20 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-white/70">
+                  Module 01
                 </span>
+                <div className="inline-flex rounded-lg p-2.5" style={{ background: "rgba(255,255,255,0.12)" }}>
+                  <modules[0].icon size={18} className="text-white" />
+                </div>
               </div>
-              <h3 className="font-display text-xl font-bold text-white">{m.title}</h3>
-              <p className="mt-3 font-body text-sm leading-relaxed text-white/55 flex-1">
-                {m.description}
-              </p>
-              <ul className="mt-5 space-y-2">
-                {m.capabilities.map((c) => (
-                  <li key={c} className="flex items-start gap-2 text-sm text-white/55">
-                    <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "hsl(33,65%,50%)" }} />
+              <h3 className="font-display text-2xl font-bold text-white">{modules[0].title}</h3>
+              <p className="mt-3 font-body text-sm leading-relaxed text-white/70">{modules[0].description}</p>
+              <ul className="mt-6 grid grid-cols-2 gap-2">
+                {modules[0].capabilities.map((c) => (
+                  <li key={c} className="flex items-start gap-2 text-sm text-white/65">
+                    <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-green-400/80" />
                     <span className="font-body leading-relaxed">{c}</span>
                   </li>
                 ))}
               </ul>
             </div>
-          ))}
+          </div>
+
+          {/* Card 02 — dark */}
+          <div
+            className="card-hover flex flex-col rounded-2xl border border-white/[0.10] p-8 transition-colors hover:border-green-500/30"
+            style={{ background: "rgba(255,255,255,0.04)" }}
+          >
+            <div className="mb-5 flex items-center justify-between">
+              <span className="rounded-full border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-white/50">
+                Module 02
+              </span>
+              <div className="inline-flex rounded-lg p-2.5" style={{ background: "rgba(255,255,255,0.07)" }}>
+                <modules[1].icon size={18} className="text-white/70" />
+              </div>
+            </div>
+            <h3 className="font-display text-xl font-bold text-white">{modules[1].title}</h3>
+            <p className="mt-3 font-body text-sm leading-relaxed text-white/55 flex-1">{modules[1].description}</p>
+            <ul className="mt-5 space-y-2">
+              {modules[1].capabilities.map((c) => (
+                <li key={c} className="flex items-start gap-2 text-sm text-white/50">
+                  <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "hsl(33,65%,50%)" }} />
+                  <span className="font-body leading-relaxed">{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Stats row — 3 bento tiles */}
+          <div className="rounded-2xl border border-white/[0.10] p-6 flex flex-col justify-between"
+            style={{ background: "rgba(255,255,255,0.04)" }}>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-white/40">Countries covered</p>
+            <div>
+              <p className="font-display text-5xl font-bold text-white">40+</p>
+              <p className="mt-1 text-sm text-white/45">Across Africa, SE Asia &amp; MENA</p>
+            </div>
+          </div>
+
+          <div
+            className="rounded-2xl p-6 flex flex-col justify-between"
+            style={{ background: "linear-gradient(135deg, #1a4d2e 0%, #166534 100%)" }}
+          >
+            <p className="font-mono text-[10px] uppercase tracking-widest text-green-300/60">Hectares monitored</p>
+            <div>
+              <p className="font-display text-5xl font-bold text-white">3.2M</p>
+              <p className="mt-1 text-sm text-green-200/50">Plot-level resolution</p>
+            </div>
+          </div>
+
+          {/* Card 03 — Sovereign AI, spans 1 col */}
+          <div
+            className="card-hover flex flex-col rounded-2xl border border-white/[0.10] p-8 transition-colors hover:border-green-500/30"
+            style={{ background: "rgba(255,255,255,0.04)" }}
+          >
+            <div className="mb-5 flex items-center justify-between">
+              <span className="rounded-full border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-white/50">
+                Module 03
+              </span>
+              <div className="inline-flex rounded-lg p-2.5" style={{ background: "rgba(255,255,255,0.07)" }}>
+                <modules[2].icon size={18} className="text-white/70" />
+              </div>
+            </div>
+            <h3 className="font-display text-xl font-bold text-white">{modules[2].title}</h3>
+            <p className="mt-3 font-body text-sm leading-relaxed text-white/55 flex-1">{modules[2].description}</p>
+            <ul className="mt-5 space-y-2">
+              {modules[2].capabilities.map((c) => (
+                <li key={c} className="flex items-start gap-2 text-sm text-white/50">
+                  <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "hsl(33,65%,50%)" }} />
+                  <span className="font-body leading-relaxed">{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </div>
 
         {/* Interactive Dashboard Preview */}
@@ -177,11 +251,11 @@ const SolutionSection = () => {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {pipeline.map((p) => (
               <div
                 key={p.title}
-                className="border border-white/[0.12] p-7 transition-colors hover:border-white/20"
+                className="rounded-2xl border border-white/[0.10] p-7 transition-colors hover:border-green-500/25"
                 style={{ background: "rgba(255,255,255,0.04)" }}
               >
                 <div className="mb-4 flex items-center gap-3">
@@ -208,14 +282,14 @@ const SolutionSection = () => {
           <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-white">
             Infrastructure built for the Global South.
           </h3>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {differentiators.map((d) => (
               <div
                 key={d.title}
-                className="border border-white/[0.12] p-6 transition-colors hover:border-white/20"
+                className="rounded-2xl border border-white/[0.10] p-6 transition-colors hover:border-green-500/25"
                 style={{ background: "rgba(255,255,255,0.04)" }}
               >
-                <div className="mb-4 inline-flex border border-white/[0.12] p-2.5" style={{ background: "rgba(255,255,255,0.05)" }}>
+                <div className="mb-4 inline-flex rounded-xl border border-white/[0.10] p-2.5" style={{ background: "rgba(255,255,255,0.06)" }}>
                   <d.icon size={18} className="text-white/70" />
                 </div>
                 <h4 className="font-display text-sm font-bold text-white">{d.title}</h4>

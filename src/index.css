@@ -101,7 +101,7 @@
   }
 
   .hero-gradient {
-    background: radial-gradient(ellipse at 50% -10%, rgba(20,83,45,0.28) 0%, #030503 50%, #000000 100%);
+    background: radial-gradient(ellipse at 50% 0%, rgba(22,163,74,0.22) 0%, rgba(20,83,45,0.14) 30%, #030503 60%, #000000 100%);
   }
 
   .gold-gradient {
@@ -123,8 +123,8 @@
   }
 
   .card-hover:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px -12px hsl(0 0% 0% / 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px -12px rgba(22,163,74,0.2), 0 4px 16px -4px rgba(0,0,0,0.5);
   }
 
   .font-mono-accent {
