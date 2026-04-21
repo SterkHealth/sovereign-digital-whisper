@@ -134,144 +134,80 @@ const SolutionSection = () => {
           </p>
         </div>
 
-        {/* Bento module grid */}
+        {/* Module cards — 3 equal columns */}
         <div className="mt-14 grid gap-4 lg:grid-cols-3">
-
-          {/* Card 01 — featured neon green fill, spans 2 cols */}
-          <div
-            className="card-hover relative overflow-hidden rounded-2xl p-8 lg:col-span-2"
-            style={{
-              background: "linear-gradient(135deg, #14532d 0%, #166534 40%, #15803d 100%)",
-              border: "1px solid rgba(74,222,128,0.45)",
-              boxShadow: "0 0 50px rgba(74,222,128,0.25), inset 0 1px 0 rgba(74,222,128,0.25)",
-            }}
-          >
-            {/* Inner glow */}
+          {[
+            { icon: Icon0, mod: modules[0], num: "01" },
+            { icon: Icon1, mod: modules[1], num: "02" },
+            { icon: Icon2, mod: modules[2], num: "03" },
+          ].map(({ icon: Icon, mod, num }) => (
             <div
-              className="pointer-events-none absolute inset-0 rounded-2xl"
-              style={{ background: "radial-gradient(ellipse at 15% 20%, rgba(74,222,128,0.40) 0%, transparent 55%)" }}
-            />
-            <div className="relative">
+              key={num}
+              className="card-hover flex flex-col rounded-2xl p-8 transition-all"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(74,222,128,0.18)" }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = "rgba(74,222,128,0.45)";
+                e.currentTarget.style.boxShadow = "0 0 30px rgba(74,222,128,0.10)";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = "rgba(74,222,128,0.18)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
               <div className="mb-5 flex items-center justify-between">
                 <span
                   className="rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-widest"
-                  style={{ border: "1px solid rgba(74,222,128,0.35)", color: "rgba(74,222,128,0.85)" }}
+                  style={{ border: "1px solid rgba(74,222,128,0.30)", color: "#4ade80" }}
                 >
-                  Module 01
+                  Module {num}
                 </span>
                 <div
                   className="inline-flex rounded-xl p-2.5"
-                  style={{ background: "rgba(74,222,128,0.15)", border: "1px solid rgba(74,222,128,0.2)" }}
+                  style={{ background: "rgba(74,222,128,0.10)", border: "1px solid rgba(74,222,128,0.15)" }}
                 >
-                  <Icon0 size={18} className="text-white" />
+                  <Icon size={18} style={{ color: "#4ade80" }} />
                 </div>
               </div>
-              <h3 className="font-display text-2xl font-bold text-white">{modules[0].title}</h3>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>{modules[0].description}</p>
-              <ul className="mt-6 grid grid-cols-2 gap-2">
-                {modules[0].capabilities.map((c) => (
-                  <li key={c} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>
+              <h3 className="font-display text-xl font-bold text-white">{mod.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.50)" }}>{mod.description}</p>
+              <ul className="mt-6 space-y-2">
+                {mod.capabilities.map((c) => (
+                  <li key={c} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
                     <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "#4ade80" }} />
                     <span className="leading-relaxed">{c}</span>
                   </li>
                 ))}
               </ul>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Card 02 — dark */}
-          <div
-            className="card-hover flex flex-col rounded-2xl p-8 transition-all"
-            style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.07)",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(74,222,128,0.25)")}
-            onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
-          >
-            <div className="mb-5 flex items-center justify-between">
-              <span
-                className="rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-widest"
-                style={{ border: "1px solid rgba(255,255,255,0.10)", color: "rgba(255,255,255,0.40)" }}
-              >
-                Module 02
-              </span>
-              <div className="inline-flex rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.06)" }}>
-                <Icon1 size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
-              </div>
-            </div>
-            <h3 className="font-display text-xl font-bold text-white">{modules[1].title}</h3>
-            <p className="mt-3 text-sm leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.45)" }}>{modules[1].description}</p>
-            <ul className="mt-5 space-y-2">
-              {modules[1].capabilities.map((c) => (
-                <li key={c} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
-                  <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "#4ade80" }} />
-                  <span className="leading-relaxed">{c}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Stats bento — Countries */}
-          <div
-            className="rounded-2xl p-6 flex flex-col justify-between"
-            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
-          >
-            <p className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "rgba(74,222,128,0.5)" }}>Countries covered</p>
-            <div>
+        {/* Stats row */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          <div className="rounded-2xl p-6 flex flex-col justify-between"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(74,222,128,0.18)" }}>
+            <p className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "#4ade80" }}>Countries covered</p>
+            <div className="mt-4">
               <p className="font-display text-5xl font-bold text-white">40+</p>
-              <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.35)" }}>Across Africa, SE Asia &amp; MENA</p>
+              <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.40)" }}>Across Africa, SE Asia &amp; MENA</p>
             </div>
           </div>
-
-          {/* Stats bento — Hectares — green fill */}
-          <div
-            className="rounded-2xl p-6 flex flex-col justify-between"
-            style={{
-              background: "linear-gradient(135deg, #052e16 0%, #166534 100%)",
-              border: "1px solid rgba(74,222,128,0.2)",
-            }}
-          >
-            <p className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "rgba(74,222,128,0.65)" }}>Hectares monitored</p>
-            <div>
+          <div className="rounded-2xl p-6 flex flex-col justify-between"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(74,222,128,0.18)" }}>
+            <p className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "#4ade80" }}>Hectares monitored</p>
+            <div className="mt-4">
               <p className="font-display text-5xl font-bold text-white">3.2M</p>
-              <p className="mt-1 text-sm" style={{ color: "rgba(74,222,128,0.45)" }}>Plot-level resolution</p>
+              <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.40)" }}>Plot-level resolution</p>
             </div>
           </div>
-
-          {/* Card 03 — Sovereign AI */}
-          <div
-            className="card-hover flex flex-col rounded-2xl p-8 transition-all"
-            style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.07)",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(74,222,128,0.25)")}
-            onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
-          >
-            <div className="mb-5 flex items-center justify-between">
-              <span
-                className="rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-widest"
-                style={{ border: "1px solid rgba(255,255,255,0.10)", color: "rgba(255,255,255,0.40)" }}
-              >
-                Module 03
-              </span>
-              <div className="inline-flex rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.06)" }}>
-                <Icon2 size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
-              </div>
+          <div className="rounded-2xl p-6 flex flex-col justify-between"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(74,222,128,0.18)" }}>
+            <p className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "#4ade80" }}>Data sources</p>
+            <div className="mt-4">
+              <p className="font-display text-5xl font-bold text-white">15+</p>
+              <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.40)" }}>Satellite &amp; ground truth feeds</p>
             </div>
-            <h3 className="font-display text-xl font-bold text-white">{modules[2].title}</h3>
-            <p className="mt-3 text-sm leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.45)" }}>{modules[2].description}</p>
-            <ul className="mt-5 space-y-2">
-              {modules[2].capabilities.map((c) => (
-                <li key={c} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
-                  <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "#4ade80" }} />
-                  <span className="leading-relaxed">{c}</span>
-                </li>
-              ))}
-            </ul>
           </div>
-
         </div>
 
         {/* Interactive Dashboard Preview */}
